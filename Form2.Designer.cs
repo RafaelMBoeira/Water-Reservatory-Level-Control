@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp2
 {
-    partial class frmPort
+    partial class PortSelectionForm
     {
         /// <summary>
         /// Required designer variable.

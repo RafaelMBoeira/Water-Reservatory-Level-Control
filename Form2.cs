@@ -12,14 +12,18 @@ using System.IO;
 
 namespace WindowsFormsApp2
 {
-    public partial class frmPort : Form
+    public partial class PortSelectionForm : Form
     {
+        private LevelControlForm frmMain;
         int load_s = 1;
-        public frmPort(string carregar)
+        public PortSelectionForm(LevelControlForm frmMain, string inoFilePath)
         {
             InitializeComponent();
-            var form1 = new Form1();
-            textBox1.Text = carregar;
+            
+            this.frmMain = frmMain;
+            this.frmMain.Enabled = false;
+
+            textBox1.Text = inoFilePath;
         }
         private void updateCOMList()
         {
@@ -43,32 +47,19 @@ namespace WindowsFormsApp2
             
             if (cbPort.SelectedItem != "")
             {
-                //define o titulo
                 sfdLoad.Title = "Salvar Comando de Carregamento do Arduino";
-                //Define as extensões permitidas
                 sfdLoad.Filter = "Arquivo de Carregamento|.BAT";
-                //define o indice do filtro
                 sfdLoad.FilterIndex = 0;
-                //Atribui um valor vazio ao nome do arquivo
                 sfdLoad.FileName = "Carregar";
-                //Define a extensão padrão como .h
                 sfdLoad.DefaultExt = ".BAT";
-                //define o diretório padrão
                 sfdLoad.InitialDirectory = textBox1.Text;
-                //restaura o diretorio atual antes de fechar a janela
                 sfdLoad.RestoreDirectory = true;
-                //Abre a caixa de dialogo e determina qual botão foi pressionado
                 DialogResult bat = sfdLoad.ShowDialog();
-                //Se o ousuário pressionar o botão Salvar
                 if (bat == DialogResult.OK)
                 {
-                    //Cria um stream usando o nome do arquivo
                     FileStream fs = new FileStream(sfdLoad.FileName, FileMode.Create);
-                    //Cria um escrito que irá escrever no stream
                     StreamWriter writer = new StreamWriter(fs);
-                    //escreve o conteúdo da caixa de texto no stream
                     writer.Write("\"C:\\Program Files (x86)\\Arduino\\arduino_debug.exe\"" + " --port " + "\"" + cbPort.Text + "\"" + " --upload " + "\"" + textBox1.Text + "\"" + "\r\n" + " pause");
-                    //fecha o escrito e o stream
                     writer.Close();
                 }
             } 
@@ -85,14 +76,13 @@ namespace WindowsFormsApp2
                 if (ardPort.IsOpen == true)
                     ardPort.Close();
                 System.Diagnostics.Process.Start(carregando);
-                var form1 = new Form1();
                 if (ardPort.IsOpen == false)
                 {
                     ardPort.Open();
                     ardPort.Write("I;");
                 }
-                form1.btSampleSizeChanger.Enabled = true;
-                form1.spNivel.PortName = cbPort.Text;
+                frmMain.btSampleSizeChanger.Enabled = true;
+                frmMain.spNivel.PortName = cbPort.Text;
             }
             load_s = 1;
             Close();
@@ -108,6 +98,7 @@ namespace WindowsFormsApp2
             lbMessage.Visible = false;
             if (ardPort.IsOpen == true) 
                 ardPort.Close();
+            frmMain.Enabled = true;
         }
     }
 }

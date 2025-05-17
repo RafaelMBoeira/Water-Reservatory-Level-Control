@@ -118,8 +118,6 @@ E:\Programa Nivel-CS\WindowsFormsApp2\Water-Reservatory-Level-Control\obj\Debug\
 E:\Programa Nivel-CS\WindowsFormsApp2\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.pdb
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.csproj.AssemblyReference.cache
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.exe.config
-E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.Form1.resources
-E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.frmPort.resources
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.Properties.Resources.resources
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.csproj.GenerateResource.cache
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.csproj.CoreCompileInputs.cache
@@ -128,3 +126,6 @@ E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\Window
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\bin\Debug\WindowsFormsApp2.exe.config
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\bin\Debug\WindowsFormsApp2.exe
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\bin\Debug\WindowsFormsApp2.pdb
+E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.LevelControlForm.resources
+E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.PortSelectionForm.resources
+E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.ConfigurationForm.resources

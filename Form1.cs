@@ -12,32 +12,38 @@ using System.Text.RegularExpressions;
 
 namespace WindowsFormsApp2
 {
-    public partial class Form1 : Form
+    public partial class LevelControlForm : Form
     {
-        int contvar = 0;
-        private string currentProjectPath = @"C:\";
-        private string skeletonsPath = @"E:\\Programa Nivel-CS\\Nova pasta\\Water-Reservatory-Level-Control\\skeletons\\";
+        private string currentProjectPath = Properties.Settings.Default.DefaultSavePath;
+        private string skeletonsPath;
         private string selectedSkeletonPath;
         private string inoFilePath;
         Dictionary<int, string> variables = new Dictionary<int, string>();
         string inputData;
-        int comp_s = 1;
-        int save_s = 1;
-        int graf_s = 1;
         int cExcel = 0;
 
         public string salvando, compilando, graphic;
-        public Form1()
+        public LevelControlForm()
         {
             InitializeComponent();
 
-            foreach (string path in System.IO.Directory.GetFiles(skeletonsPath))
-            {
-                ToolStripItem skeleton = new ToolStripMenuItem();
-                skeleton.Text = System.IO.Path.GetFileNameWithoutExtension(path);
-                skeleton.Click += skeletonSelected;
-                btSkeletonPicker.DropDownItems.Add(skeleton);
-            }
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.DefaultSkeletonPath))
+                skeletonsPath = Properties.Settings.Default.DefaultSkeletonPath;
+
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.DefaultSavePath))
+                currentProjectPath = Properties.Settings.Default.DefaultSavePath;
+
+            if (!string.IsNullOrEmpty(skeletonsPath))
+                foreach (string path in System.IO.Directory.GetFiles(skeletonsPath))
+                {
+                    ToolStripItem skeleton = new ToolStripMenuItem();
+
+                    skeleton.Text = System.IO.Path.GetFileNameWithoutExtension(path);
+                    skeleton.Click += skeletonSelected;
+                    btSkeletonPicker.DropDownItems.Add(skeleton);
+                
+                    selectedSkeletonPath = path;
+                }
         }
 
         private void skeletonSelected(object sender, EventArgs e)
@@ -63,7 +69,6 @@ namespace WindowsFormsApp2
             tmSample.Enabled = false;
             spNivel.Close();
             cExcel = 0;
-            comp_s = 1;
         }
         
         private void openFile(object sender, EventArgs e)
@@ -71,12 +76,12 @@ namespace WindowsFormsApp2
             string line;
             bool isVariableField = true;
             bool isControlLawField = false;
-            OpenFileDialog opfAbrir = new OpenFileDialog();
-            if (opfAbrir.ShowDialog() == DialogResult.OK)
+            OpenFileDialog opfOpen = new OpenFileDialog();
+            if (opfOpen.ShowDialog() == DialogResult.OK)
             {
                 tbVar.Text = "";
                 tbCalculations.Text = "";
-                System.IO.StreamReader file = new System.IO.StreamReader(opfAbrir.FileName);
+                System.IO.StreamReader file = new System.IO.StreamReader(opfOpen.FileName);
                 while ((line = file.ReadLine()) != "//fim")
                 {
 
@@ -166,6 +171,18 @@ namespace WindowsFormsApp2
                 return;
             }
 
+            if (string.IsNullOrEmpty(Properties.Settings.Default.DefaultSkeletonPath))
+            {
+                MessageBox.Show("O caminho padrão para escolha de esqueletos não está configurado, altere nas configurações.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(selectedSkeletonPath))
+            {
+                MessageBox.Show("Selecione um Esqueleto!");
+                return;
+            }
+
             currentProjectPath = saveCompilationFile();
             inoFilePath = currentProjectPath;
             if (!string.IsNullOrEmpty(currentProjectPath))
@@ -180,7 +197,7 @@ namespace WindowsFormsApp2
 
         private void loadProgram(object sender, EventArgs e)
         {
-            frmPort frmPort = new frmPort(inoFilePath);
+            PortSelectionForm frmPort = new PortSelectionForm(this, inoFilePath);
             frmPort.StartPosition = FormStartPosition.CenterParent;
             frmPort.Show();
         }
@@ -312,12 +329,6 @@ namespace WindowsFormsApp2
 
         private string saveCompilationFile()
         {
-            if (string.IsNullOrEmpty(selectedSkeletonPath))
-            {
-                MessageBox.Show("Selecione um Esqueleto!");
-                return "";
-            }
-
             string code = createCode(selectedSkeletonPath);
             return save(
                 "Salvar Arquivo do Compilador",
@@ -351,16 +362,12 @@ namespace WindowsFormsApp2
                 if (line.Trim().ToString().Equals("//var"))
                 {
                     for (int ind = 0; ind < chbVariables.Items.Count; ind++)
-                    {
-                        Console.WriteLine("asdadasda");
                         fullCode = string.Concat(fullCode, "float " + chbVariables.Items[ind] + " = 0;" + "\r\n");
-                    }
+
                     continue;
                 }
                 if (line.Trim().ToString().Equals("//law"))
                 {
-                    Console.WriteLine(tbCalculations.Lines.Length);
-                    Console.WriteLine(chbVariables.CheckedItems.Count);
                     for (int ind = 0; ind < tbCalculations.Lines.Length; ind++)
                         fullCode = string.Concat(fullCode, tbCalculations.Lines[ind] + ";" + "\r\n");
 
@@ -378,6 +385,13 @@ namespace WindowsFormsApp2
             return fullCode;
         }
 
+        private void openConfigurations(object sender, EventArgs e)
+        {
+            ConfigurationForm frmConfig = new ConfigurationForm(this);
+            frmConfig.StartPosition = FormStartPosition.CenterParent;
+            frmConfig.Show();
+        }
+
         private string save(
             string title,
             string filter,
@@ -388,30 +402,18 @@ namespace WindowsFormsApp2
         )
         {
             sfdSave.Title = title;
-            //Define as extensões permitidas
             sfdSave.Filter = filter;
-            //define o indice do filtro
             sfdSave.FilterIndex = 0;
-            //Atribui um valor vazio ao nome do arquivo
             sfdSave.FileName = filename;
-            //Define a extensão padrão como .h
             sfdSave.DefaultExt = defaultExt;
-            //define o diretório padrão
             sfdSave.InitialDirectory = initialDirectory;
-            //restaura o diretorio atual antes de fechar a janela
             sfdSave.RestoreDirectory = true;
-            //Abre a caixa de dialogo e determina qual botão foi pressionado
             DialogResult result = sfdSave.ShowDialog();
-            //Se o ousuário pressionar o botão Salvar
             if (result == DialogResult.OK)
             {
-                //Cria um stream usando o nome do arquivo
                 FileStream fs = new FileStream(sfdSave.FileName, FileMode.Create);
-                //Cria um escrito que irá escrever no stream
                 StreamWriter writer = new StreamWriter(fs);
-                //escreve o conteúdo da caixa de texto no stream
                 writer.Write(content);
-                //fecha o escrito e o stream
                 writer.Close();
 
                 return sfdSave.FileName;
