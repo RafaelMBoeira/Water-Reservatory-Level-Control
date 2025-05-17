@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,6 +50,8 @@
             this.btLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.btSaveChart = new System.Windows.Forms.ToolStripMenuItem();
             this.btRun = new System.Windows.Forms.ToolStripMenuItem();
+            this.btSimulation = new System.Windows.Forms.ToolStripMenuItem();
+            this.btMonitor = new System.Windows.Forms.ToolStripMenuItem();
             this.btSkeletonPicker = new System.Windows.Forms.ToolStripMenuItem();
             this.btConfigurations = new System.Windows.Forms.ToolStripMenuItem();
             this.chMonitor = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -60,14 +62,10 @@
             this.spNivel = new System.IO.Ports.SerialPort(this.components);
             this.sfdChart = new System.Windows.Forms.SaveFileDialog();
             this.tmVariaveis = new System.Windows.Forms.Timer(this.components);
-            this.tbExcel1 = new System.Windows.Forms.TextBox();
-            this.tbExcel2 = new System.Windows.Forms.TextBox();
-            this.tbExcel3 = new System.Windows.Forms.TextBox();
-            this.tbExcel4 = new System.Windows.Forms.TextBox();
-            this.tbExcel5 = new System.Windows.Forms.TextBox();
             this.btSampleSizeChanger = new System.Windows.Forms.Button();
             this.chbVariables = new System.Windows.Forms.CheckedListBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.pnSimulation = new System.Windows.Forms.Panel();
             this.navbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chMonitor)).BeginInit();
             this.SuspendLayout();
@@ -182,10 +180,26 @@
             // 
             // btRun
             // 
+            this.btRun.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btSimulation,
+            this.btMonitor});
             this.btRun.Name = "btRun";
             this.btRun.Size = new System.Drawing.Size(63, 24);
             this.btRun.Text = "Iniciar";
-            this.btRun.Click += new System.EventHandler(this.startSimulation);
+            // 
+            // btSimulation
+            // 
+            this.btSimulation.Name = "btSimulation";
+            this.btSimulation.Size = new System.Drawing.Size(224, 26);
+            this.btSimulation.Text = "Simulação";
+            this.btSimulation.Click += new System.EventHandler(this.startSimulation);
+            // 
+            // btMonitor
+            // 
+            this.btMonitor.Name = "btMonitor";
+            this.btMonitor.Size = new System.Drawing.Size(224, 26);
+            this.btMonitor.Text = "Monitoramento";
+            this.btMonitor.Click += new System.EventHandler(this.startMonitoring);
             // 
             // btSkeletonPicker
             // 
@@ -203,55 +217,55 @@
             // chMonitor
             // 
             this.chMonitor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            chartArea1.AxisY.Maximum = 310D;
-            chartArea1.AxisY.Minimum = 0D;
-            chartArea1.Name = "ChartArea1";
-            this.chMonitor.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chMonitor.Legends.Add(legend1);
+            chartArea4.AxisY.Maximum = 310D;
+            chartArea4.AxisY.Minimum = 0D;
+            chartArea4.Name = "ChartArea1";
+            this.chMonitor.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chMonitor.Legends.Add(legend4);
             this.chMonitor.Location = new System.Drawing.Point(552, 50);
             this.chMonitor.Margin = new System.Windows.Forms.Padding(4);
             this.chMonitor.Name = "chMonitor";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "Series2";
-            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Legend = "Legend1";
-            series3.Name = "Series3";
-            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series3.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Legend = "Legend1";
-            series4.Name = "Series4";
-            series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Legend = "Legend1";
-            series5.Name = "Series5";
-            series5.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series5.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            this.chMonitor.Series.Add(series1);
-            this.chMonitor.Series.Add(series2);
-            this.chMonitor.Series.Add(series3);
-            this.chMonitor.Series.Add(series4);
-            this.chMonitor.Series.Add(series5);
+            series16.ChartArea = "ChartArea1";
+            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series16.Legend = "Legend1";
+            series16.Name = "Series1";
+            series16.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series16.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series17.ChartArea = "ChartArea1";
+            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series17.Legend = "Legend1";
+            series17.Name = "Series2";
+            series17.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series17.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series18.ChartArea = "ChartArea1";
+            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series18.Legend = "Legend1";
+            series18.Name = "Series3";
+            series18.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series18.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series19.ChartArea = "ChartArea1";
+            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series19.Legend = "Legend1";
+            series19.Name = "Series4";
+            series19.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series19.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series20.ChartArea = "ChartArea1";
+            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series20.Legend = "Legend1";
+            series20.Name = "Series5";
+            series20.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series20.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            this.chMonitor.Series.Add(series16);
+            this.chMonitor.Series.Add(series17);
+            this.chMonitor.Series.Add(series18);
+            this.chMonitor.Series.Add(series19);
+            this.chMonitor.Series.Add(series20);
             this.chMonitor.Size = new System.Drawing.Size(600, 314);
             this.chMonitor.TabIndex = 16;
             this.chMonitor.Text = "chart1";
-            title1.Name = "Nível d\'Água";
-            this.chMonitor.Titles.Add(title1);
+            title4.Name = "Nível d\'Água";
+            this.chMonitor.Titles.Add(title4);
             // 
             // tbVar
             // 
@@ -291,56 +305,6 @@
             // 
             this.tmVariaveis.Enabled = true;
             // 
-            // tbExcel1
-            // 
-            this.tbExcel1.Location = new System.Drawing.Point(761, 676);
-            this.tbExcel1.Margin = new System.Windows.Forms.Padding(4);
-            this.tbExcel1.Multiline = true;
-            this.tbExcel1.Name = "tbExcel1";
-            this.tbExcel1.Size = new System.Drawing.Size(132, 24);
-            this.tbExcel1.TabIndex = 31;
-            this.tbExcel1.Visible = false;
-            // 
-            // tbExcel2
-            // 
-            this.tbExcel2.Location = new System.Drawing.Point(902, 676);
-            this.tbExcel2.Margin = new System.Windows.Forms.Padding(4);
-            this.tbExcel2.Multiline = true;
-            this.tbExcel2.Name = "tbExcel2";
-            this.tbExcel2.Size = new System.Drawing.Size(132, 24);
-            this.tbExcel2.TabIndex = 32;
-            this.tbExcel2.Visible = false;
-            // 
-            // tbExcel3
-            // 
-            this.tbExcel3.Location = new System.Drawing.Point(761, 740);
-            this.tbExcel3.Margin = new System.Windows.Forms.Padding(4);
-            this.tbExcel3.Multiline = true;
-            this.tbExcel3.Name = "tbExcel3";
-            this.tbExcel3.Size = new System.Drawing.Size(132, 24);
-            this.tbExcel3.TabIndex = 33;
-            this.tbExcel3.Visible = false;
-            // 
-            // tbExcel4
-            // 
-            this.tbExcel4.Location = new System.Drawing.Point(961, 708);
-            this.tbExcel4.Margin = new System.Windows.Forms.Padding(4);
-            this.tbExcel4.Multiline = true;
-            this.tbExcel4.Name = "tbExcel4";
-            this.tbExcel4.Size = new System.Drawing.Size(132, 24);
-            this.tbExcel4.TabIndex = 34;
-            this.tbExcel4.Visible = false;
-            // 
-            // tbExcel5
-            // 
-            this.tbExcel5.Location = new System.Drawing.Point(961, 740);
-            this.tbExcel5.Margin = new System.Windows.Forms.Padding(4);
-            this.tbExcel5.Multiline = true;
-            this.tbExcel5.Name = "tbExcel5";
-            this.tbExcel5.Size = new System.Drawing.Size(132, 24);
-            this.tbExcel5.TabIndex = 35;
-            this.tbExcel5.Visible = false;
-            // 
             // btSampleSizeChanger
             // 
             this.btSampleSizeChanger.Enabled = false;
@@ -369,19 +333,22 @@
             this.label6.TabIndex = 41;
             this.label6.Text = "Selecione Variáveis para Monitoramento:";
             // 
+            // panel1
+            // 
+            this.pnSimulation.Location = new System.Drawing.Point(794, 451);
+            this.pnSimulation.Name = "panel1";
+            this.pnSimulation.Size = new System.Drawing.Size(358, 379);
+            this.pnSimulation.TabIndex = 42;
+            // 
             // LevelControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1165, 844);
+            this.Controls.Add(this.pnSimulation);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.chbVariables);
             this.Controls.Add(this.btSampleSizeChanger);
-            this.Controls.Add(this.tbExcel5);
-            this.Controls.Add(this.tbExcel4);
-            this.Controls.Add(this.tbExcel3);
-            this.Controls.Add(this.tbExcel2);
-            this.Controls.Add(this.tbExcel1);
             this.Controls.Add(this.tbCalculations);
             this.Controls.Add(this.tbVar);
             this.Controls.Add(this.chMonitor);
@@ -422,11 +389,6 @@
         private System.Windows.Forms.ToolStripMenuItem btRun;
         public System.IO.Ports.SerialPort spNivel;
         private System.Windows.Forms.Timer tmVariaveis;
-        private System.Windows.Forms.TextBox tbExcel1;
-        private System.Windows.Forms.TextBox tbExcel2;
-        private System.Windows.Forms.TextBox tbExcel3;
-        private System.Windows.Forms.TextBox tbExcel4;
-        private System.Windows.Forms.TextBox tbExcel5;
         public System.Windows.Forms.DataVisualization.Charting.Chart chMonitor;
         public System.Windows.Forms.Button btSampleSizeChanger;
         public System.Windows.Forms.ToolStripMenuItem btSaveChart;
@@ -435,6 +397,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ToolStripMenuItem btSkeletonPicker;
         private System.Windows.Forms.ToolStripMenuItem btConfigurations;
+        private System.Windows.Forms.ToolStripMenuItem btSimulation;
+        private System.Windows.Forms.ToolStripMenuItem btMonitor;
+        private System.Windows.Forms.Panel pnSimulation;
     }
 }
 

@@ -15,7 +15,7 @@ namespace WindowsFormsApp2
     public partial class PortSelectionForm : Form
     {
         private LevelControlForm frmMain;
-        int load_s = 1;
+        private string inoFilePath;
         public PortSelectionForm(LevelControlForm frmMain, string inoFilePath)
         {
             InitializeComponent();
@@ -23,7 +23,7 @@ namespace WindowsFormsApp2
             this.frmMain = frmMain;
             this.frmMain.Enabled = false;
 
-            textBox1.Text = inoFilePath;
+            this.inoFilePath = inoFilePath;
         }
         private void updateCOMList()
         {
@@ -49,25 +49,18 @@ namespace WindowsFormsApp2
 
         private void loadToBoard(object sender, EventArgs e)
         {
-            string carregando;
+            string loadFile = "";
             
             if (cbPort.Text != "")
             {
-                sfdLoad.Title = "Salvar Comando de Carregamento do Arduino";
-                sfdLoad.Filter = "Arquivo de Carregamento|.BAT";
-                sfdLoad.FilterIndex = 0;
-                sfdLoad.FileName = "Carregar";
-                sfdLoad.DefaultExt = ".BAT";
-                sfdLoad.InitialDirectory = textBox1.Text;
-                sfdLoad.RestoreDirectory = true;
-                DialogResult bat = sfdLoad.ShowDialog();
-                if (bat == DialogResult.OK)
-                {
-                    FileStream fs = new FileStream(sfdLoad.FileName, FileMode.Create);
-                    StreamWriter writer = new StreamWriter(fs);
-                    writer.Write("\"C:\\Program Files (x86)\\Arduino\\arduino_debug.exe\"" + " --port " + "\"" + cbPort.Text + "\"" + " --upload " + "\"" + textBox1.Text + "\"" + "\r\n" + " pause");
-                    writer.Close();
-                }
+                loadFile = frmMain.save(
+                    "Salvar Comando de Carregamento do Arduino",
+                    "Arquivo de Carregamento|.BAT",
+                    "Carregar",
+                    ".BAT",
+                    inoFilePath,
+                    "\"C:\\Program Files (x86)\\Arduino\\arduino_debug.exe\"" + " --port " + "\"" + cbPort.Text + "\"" + " --upload " + "\"" + inoFilePath + "\"" + "\r\n" + " pause"
+                );
             } 
             else
             {
@@ -77,13 +70,12 @@ namespace WindowsFormsApp2
             }
 
 
-            if (load_s == 1)
+            if (!string.IsNullOrEmpty(loadFile))
             {
                 ardPort.PortName = cbPort.Text;
-                carregando = sfdLoad.FileName;
                 if (ardPort.IsOpen == true)
                     ardPort.Close();
-                System.Diagnostics.Process.Start(carregando);
+                System.Diagnostics.Process.Start(loadFile);
                 if (ardPort.IsOpen == false)
                 {
                     ardPort.Open();
@@ -92,7 +84,6 @@ namespace WindowsFormsApp2
                 frmMain.btSampleSizeChanger.Enabled = true;
                 frmMain.spNivel.PortName = cbPort.Text;
             }
-            load_s = 1;
             Close();
         }
 

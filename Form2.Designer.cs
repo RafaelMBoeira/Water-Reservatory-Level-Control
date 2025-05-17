@@ -36,13 +36,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ardPort = new System.IO.Ports.SerialPort(this.components);
             this.sfdLoad = new System.Windows.Forms.SaveFileDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.lbMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btUpdate
             // 
-            this.btUpdate.Location = new System.Drawing.Point(8, 137);
+            this.btUpdate.Location = new System.Drawing.Point(9, 96);
             this.btUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(100, 28);
@@ -53,7 +52,7 @@
             // 
             // btSelect
             // 
-            this.btSelect.Location = new System.Drawing.Point(116, 137);
+            this.btSelect.Location = new System.Drawing.Point(117, 96);
             this.btSelect.Margin = new System.Windows.Forms.Padding(4);
             this.btSelect.Name = "btSelect";
             this.btSelect.Size = new System.Drawing.Size(100, 28);
@@ -64,7 +63,7 @@
             // 
             // btCancel
             // 
-            this.btCancel.Location = new System.Drawing.Point(224, 137);
+            this.btCancel.Location = new System.Drawing.Point(225, 96);
             this.btCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(100, 28);
@@ -92,18 +91,9 @@
             this.label1.Text = "Selecione a porta de comunicação";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(88, 61);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 22);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Visible = false;
-            // 
             // lbMessage
             // 
-            this.lbMessage.Location = new System.Drawing.Point(8, 99);
+            this.lbMessage.Location = new System.Drawing.Point(11, 66);
             this.lbMessage.Name = "lbMessage";
             this.lbMessage.Size = new System.Drawing.Size(317, 16);
             this.lbMessage.TabIndex = 6;
@@ -115,9 +105,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 178);
+            this.ClientSize = new System.Drawing.Size(337, 137);
             this.Controls.Add(this.lbMessage);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbPort);
             this.Controls.Add(this.btCancel);
@@ -128,7 +117,6 @@
             this.Text = "Porta de Comunicação";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.whenClosed);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -140,7 +128,6 @@
         private System.Windows.Forms.ComboBox cbPort;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SaveFileDialog sfdLoad;
-        private System.Windows.Forms.TextBox textBox1;
         public System.IO.Ports.SerialPort ardPort;
         private System.Windows.Forms.Label lbMessage;
     }

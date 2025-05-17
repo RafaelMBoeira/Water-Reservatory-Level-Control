@@ -16,19 +16,17 @@ namespace WindowsFormsApp2
 {
     public partial class LevelControlForm : Form
     {
-        private string currentProjectPath = Properties.Settings.Default.DefaultSavePath;
+        private string currentProjectPath;
         private string skeletonsPath;
         private string selectedSkeletonPath;
         private string inoFilePath;
         private string csvPath = "";
         private string compilerPath = "";
+        private string inputData;
+        private int sampleCount = 0;
+        private bool running = false;
         private ConcurrentQueue<string> receivedDataQueue = new ConcurrentQueue<string>();
         Dictionary<int, string> variables = new Dictionary<int, string>();
-        string inputData;
-        int cExcel = 0;
-        bool running = false;
-
-        public string salvando, compilando, graphic;
         public LevelControlForm()
         {
             InitializeComponent();
@@ -80,12 +78,7 @@ namespace WindowsFormsApp2
         private void newFile(object sender, EventArgs e)
         {
             tbVar.Focus();
-            currentProjectPath = @"C:\";
-            tbExcel1.Text = "";
-            tbExcel2.Text = "";
-            tbExcel3.Text = "";
-            tbExcel4.Text = "";
-            tbExcel5.Text = "";
+            currentProjectPath = Properties.Settings.Default.DefaultSavePath;
             chMonitor.Series.Clear();
             tbVar.Text = "";
             tbCalculations.Text = "";
@@ -94,7 +87,7 @@ namespace WindowsFormsApp2
             btSaveChart.Enabled = false;
             tmSample.Enabled = false;
             spNivel.Close();
-            cExcel = 0;
+            sampleCount = 0;
         }
         private void openFile(object sender, EventArgs e)
         {
@@ -212,8 +205,8 @@ namespace WindowsFormsApp2
             if (!string.IsNullOrEmpty(csvPath))
                 compilerPath = saveCommandFile();
 
-            //if (!string.IsNullOrEmpty(compilerPath))
-            //    System.Diagnostics.Process.Start(compilerPath);
+            if (!string.IsNullOrEmpty(compilerPath))
+                System.Diagnostics.Process.Start(compilerPath);
         }
         private string createCode(string skeletonPath)
         {
@@ -267,52 +260,14 @@ namespace WindowsFormsApp2
             {
                 FileStream fs = new FileStream(sfdChart.FileName, FileMode.Create);
                 StreamWriter writer = new StreamWriter(fs);
-                writer.Write(tbExcel1.Text + "\r\n");
-                writer.Write(tbExcel2.Text + "\r\n");
-                writer.Write(tbExcel3.Text + "\r\n");
-                writer.Write(tbExcel4.Text + "\r\n");
-                writer.Write(tbExcel5.Text + "\r\n");
                 writer.Close();
             }
         }
-        private void startSimulation(object sender, EventArgs e)
+        private void startMonitoring(object sender, EventArgs e)
         {
-            
-            if (btRun.Text.Equals("Iniciar"))
-            {
-                try
-                {
-                    if (spNivel.IsOpen == false)
-                        spNivel.Open();
-                    spNivel.Write("I");
-                } 
-                catch
-                {
-                    MessageBox.Show("Porta não encontrada ou não está disponível.");
-                    return;
-                }
-                running = true;
-
-                chMonitor.Series.Clear();
-                foreach (string variable in chbVariables.CheckedItems)
-                    chMonitor.Series.Add(variable);
-
-                btRun.Text = "Parar";
-                btSaveChart.Enabled = true;
-                startThreatingDataReceived();
-                return;
-            }
-
-            if (btRun.Text.Equals("Parar"))
-            {
-                spNivel.Close();
-                running = false;
-                cExcel = 0;
-                btRun.Text = "Iniciar";
-                btSaveChart.Enabled = false;
-                return;
-            }
-
+            MonitoringForm frmMonitor = new MonitoringForm(this, csvPath);
+            frmMonitor.StartPosition = FormStartPosition.CenterParent;
+            frmMonitor.Show();
         }
         private void dataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
@@ -320,35 +275,7 @@ namespace WindowsFormsApp2
             spNivel.Close();
             receivedDataQueue.Enqueue(inputData);
         }
-        private void startThreatingDataReceived()
-        {
-            Task.Run(() =>
-            {
-                using (StreamWriter writer = new StreamWriter(csvPath, append: true))
-                {
-                    while (running)
-                    {
-                        if (receivedDataQueue.IsEmpty)
-                            continue;
-
-                        string[] varValues = inputData.Split(';');
-
-                        int i = 0;
-                        foreach (string value in varValues)
-                            chMonitor.Series[i].Points.AddXY(Convert.ToInt64(tbPeriodo.Text) * cExcel, Convert.ToDouble(value));
-
-                        if (chMonitor.Series.Count > 100)
-                            chMonitor.Series.RemoveAt(0);
-
-                        writer.Write(Convert.ToString(Convert.ToInt32(tbPeriodo.Text) * cExcel) + ";" + inputData + "\r\n");
-
-                        cExcel++;
-                    }
-                    writer.Close();
-                }
-            });
-        }
-        private string save(
+        public string save(
             string title,
             string filter,
             string filename,
@@ -426,6 +353,10 @@ namespace WindowsFormsApp2
             if (spNivel.IsOpen == false)
                 spNivel.Open();
             spNivel.Write("T" + tbPeriodo.Text);
+        }
+
+        private void startSimulation(object sender, EventArgs e)
+        {
         }
     }
 }
