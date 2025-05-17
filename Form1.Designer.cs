@@ -50,6 +50,7 @@
             this.btLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.btSaveChart = new System.Windows.Forms.ToolStripMenuItem();
             this.btRun = new System.Windows.Forms.ToolStripMenuItem();
+            this.btSkeletonPicker = new System.Windows.Forms.ToolStripMenuItem();
             this.chNivel = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tbVar = new System.Windows.Forms.TextBox();
             this.tbCalculations = new System.Windows.Forms.TextBox();
@@ -127,7 +128,8 @@
             this.btCompile,
             this.btLoad,
             this.btSaveChart,
-            this.btRun});
+            this.btRun,
+            this.btSkeletonPicker});
             this.navbar.Location = new System.Drawing.Point(0, 0);
             this.navbar.Name = "navbar";
             this.navbar.Size = new System.Drawing.Size(1165, 28);
@@ -183,6 +185,12 @@
             this.btRun.Size = new System.Drawing.Size(63, 24);
             this.btRun.Text = "Iniciar";
             this.btRun.Click += new System.EventHandler(this.startSimulation);
+            // 
+            // btSkeletonPicker
+            // 
+            this.btSkeletonPicker.Name = "btSkeletonPicker";
+            this.btSkeletonPicker.Size = new System.Drawing.Size(161, 24);
+            this.btSkeletonPicker.Text = "Selecionar Esqueleto";
             // 
             // chNivel
             // 
@@ -423,6 +431,7 @@
         public System.Windows.Forms.TextBox tbPeriodo;
         private System.Windows.Forms.CheckedListBox chbVariables;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolStripMenuItem btSkeletonPicker;
     }
 }
 

@@ -16,6 +16,8 @@ namespace WindowsFormsApp2
     {
         int contvar = 0;
         private string currentProjectPath = @"C:\";
+        private string skeletonsPath = @"E:\\Programa Nivel-CS\\Nova pasta\\Water-Reservatory-Level-Control\\skeletons\\";
+        private string selectedSkeletonPath;
         private string inoFilePath;
         Dictionary<int, string> variables = new Dictionary<int, string>();
         string inputData;
@@ -28,6 +30,19 @@ namespace WindowsFormsApp2
         public Form1()
         {
             InitializeComponent();
+
+            foreach (string path in System.IO.Directory.GetFiles(skeletonsPath))
+            {
+                ToolStripItem skeleton = new ToolStripMenuItem();
+                skeleton.Text = System.IO.Path.GetFileNameWithoutExtension(path);
+                skeleton.Click += skeletonSelected;
+                btSkeletonPicker.DropDownItems.Add(skeleton);
+            }
+        }
+
+        private void skeletonSelected(object sender, EventArgs e)
+        {
+            selectedSkeletonPath = skeletonsPath + ((ToolStripItem) sender).Text + ".txt";
         }
 
         private void newFile(object sender, EventArgs e)
@@ -297,7 +312,13 @@ namespace WindowsFormsApp2
 
         private string saveCompilationFile()
         {
-            string code = createCode("E:\\Programa Nivel-CS\\Nova pasta\\Water-Reservatory-Level-Control\\skeletons\\ultrassonic.txt");
+            if (string.IsNullOrEmpty(selectedSkeletonPath))
+            {
+                MessageBox.Show("Selecione um Esqueleto!");
+                return "";
+            }
+
+            string code = createCode(selectedSkeletonPath);
             return save(
                 "Salvar Arquivo do Compilador",
                 "Compilador|.ino",
