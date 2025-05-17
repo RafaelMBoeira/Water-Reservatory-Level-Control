@@ -16,6 +16,7 @@ namespace WindowsFormsApp2
     {
         int contvar = 0;
         private string currentProjectPath = @"C:\";
+        private string inoFilePath;
         Dictionary<int, string> variables = new Dictionary<int, string>();
         string inputData;
         int comp_s = 1;
@@ -90,59 +91,39 @@ namespace WindowsFormsApp2
         private void saveFile(object sender, EventArgs e)
         {
             string variables = tbVar.Text.Trim();
-                string controlLaw = tbCalculations.Text.Trim();
-                //verifica se existe algo digitado na caixa de texto
-                if (string.IsNullOrEmpty(variables))
-                {
-                    MessageBox.Show("Informe algo na caixa de texto das Variáveis");
-                    return;
-                }
-                if (variables == "//Declare aqui novas variáveis")
-                {
-                    MessageBox.Show("Informe novas variáveis");
-                    return;
-                }
-                if (string.IsNullOrEmpty(controlLaw))
-                {
-                    MessageBox.Show("Informe algo na caixa de texto da lei de controle");
-                    return;
-                }
-                if (controlLaw == "//Digite aqui sua lei de controle")
-                {
-                    MessageBox.Show("Informe sua lei de controle");
-                    return;
-                }
-                //define o titulo
-                sfdSave.Title = "Salvar Arquivo Texto";
-                //Define as extensões permitidas
-                sfdSave.Filter = "Arquivo de Texto|.txt";
-                //define o indice do filtro
-                sfdSave.FilterIndex = 0;
-                //Atribui um valor vazio ao nome do arquivo
-                sfdSave.FileName = "";
-                //Define a extensão padrão como .txt
-                sfdSave.DefaultExt = ".txt";
-                //define o diretório padrão
-                sfdSave.InitialDirectory = @"c:\";
-                //restaura o diretorio atual antes de fechar a janela
-                sfdSave.RestoreDirectory = true;
-                //Abre a caixa de dialogo e determina qual botão foi pressionado
-                DialogResult resultado = sfdSave.ShowDialog();
-                //Se o ousuário pressionar o botão Salvar
-                if (resultado == DialogResult.OK)
-                {
-                    //Cria um stream usando o nome do arquivo
-                    FileStream fs = new FileStream(sfdSave.FileName, FileMode.Create);
-                    //Cria um escrito que irá escrever no stream
-                    StreamWriter writer = new StreamWriter(fs);
-                    //escreve o conteúdo da caixa de texto no stream
-                    writer.Write(tbVar.Text);
-                    writer.Write("\r\n" + "//Lei" + "\r\n");
-                    writer.Write(tbCalculations.Text);
-                    writer.Write("\r\n" + "//fim");
-                    //fecha o escrito e o stream
-                    writer.Close();
-                }        
+            string controlLaw = tbCalculations.Text.Trim();
+            //verifica se existe algo digitado na caixa de texto
+            if (string.IsNullOrEmpty(variables))
+            {
+                MessageBox.Show("Informe algo na caixa de texto das Variáveis");
+                return;
+            }
+            if (variables == "//Declare aqui novas variáveis")
+            {
+                MessageBox.Show("Informe novas variáveis");
+                return;
+            }
+            if (string.IsNullOrEmpty(controlLaw))
+            {
+                MessageBox.Show("Informe algo na caixa de texto da lei de controle");
+                return;
+            }
+            if (controlLaw == "//Digite aqui sua lei de controle")
+            {
+                MessageBox.Show("Informe sua lei de controle");
+                return;
+            }
+
+            save(
+                "Salvar Arquivo Texto",
+                "Arquivo de Texto|.txt",
+                "Arquivo",
+                ".txt",
+                currentProjectPath,
+                tbVar.Text + "\r\n" + "//Lei" + "\r\n" + tbCalculations.Text + "\r\n" + "//fim"
+            );
+
+            return;
         }
 
         private void compile(object sender, EventArgs e)
@@ -171,6 +152,7 @@ namespace WindowsFormsApp2
                 }
 
             currentProjectPath = saveCompilationFile();
+            inoFilePath = currentProjectPath;
             if (!string.IsNullOrEmpty(currentProjectPath))
                 currentProjectPath = saveChartFile();
 
@@ -183,7 +165,7 @@ namespace WindowsFormsApp2
 
         private void loadProgram(object sender, EventArgs e)
         {
-            frmPort frmPort = new frmPort(salvando);
+            frmPort frmPort = new frmPort(inoFilePath);
             frmPort.StartPosition = FormStartPosition.CenterParent;
             frmPort.Show();
         }
@@ -315,127 +297,86 @@ namespace WindowsFormsApp2
 
         private string saveCompilationFile()
         {
-            //define o titulo
-            sfdSave.Title = "Salvar Arquivo do Compilador";
-            //Define as extensões permitidas
-            sfdSave.Filter = "Compilador|.ino";
-            //define o indice do filtro
-            sfdSave.FilterIndex = 0;
-            //Atribui um valor vazio ao nome do arquivo
-            sfdSave.FileName = "Programa";
-            //Define a extensão padrão como .h
-            sfdSave.DefaultExt = ".ino";
-            //define o diretório padrão
-            sfdSave.InitialDirectory = currentProjectPath;
-            //restaura o diretorio atual antes de fechar a janela
-            sfdSave.RestoreDirectory = true;
-            //Abre a caixa de dialogo e determina qual botão foi pressionado
-            DialogResult result = sfdSave.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                //pega o diretório onde o arquivo .ino foi salvo
-                //salvando = sfdSalvar.FileName;
-                //Cria um stream usando o nome do arquivo
-                FileStream fs = new FileStream(sfdSave.FileName, FileMode.Create);
-                //Cria um escrito que irá escrever no stream
-                StreamWriter writer = new StreamWriter(fs);
-                //escreve o conteúdo da caixa de texto no stream
-                writer.Write("#define TRIGGER_PIN 8" + "\r\n");
-                writer.Write("#define ECHO_PIN 7" + "\r\n");
-                writer.Write("#define SAIDA 9" + "\r\n");
-                writer.Write("#define USONIC_DIV 58.0" + "\r\n");
-                writer.Write("#define MEASURE_SAMPLE_DELAY 5" + "\r\n");
-                writer.Write("#define MEASURE_SAMPLES 25" + "\r\n");
-                writer.Write("#define MEASURE_DELAY 100" + "\r\n");
-                writer.Write("bool stringComplete = false;" + "\r\n");
-                writer.Write("int nivel,startFlag;" + "\r\n");
-                writer.Write("String string;" + "\r\n");
-                writer.Write("float sp;" + "\r\n");
-                //declara as variaveis
-                for (int ind = 0; ind < chbVariables.Items.Count; ind++)
-                {
-                    writer.Write("float " + chbVariables.Items[ind] + " = 0;" + "\r\n");
-                }
-
-                writer.Write("void setup()" + "\r\n" + "{" + "\r\n");
-                writer.Write("Serial.begin(9600);" + "\r\n");
-                writer.Write("pinMode(SAIDA,OUTPUT);" + "\r\n");
-                writer.Write("pinMode(TRIGGER_PIN, OUTPUT);" + "\r\n");
-                writer.Write("pinMode(ECHO_PIN, INPUT);" + "\r\n");
-                writer.Write("digitalWrite(TRIGGER_PIN, LOW);" + "\r\n");
-                writer.Write("delayMicroseconds(500);" + "\r\n");
-                writer.Write("TCCR1B = TCCR1B & 0b11111000 | 0X01;" + "\r\n");
-                writer.Write("startFlag = 0;" + "\r\n" + "}" + "\r\n");
-
-                writer.Write("void loop()" + "\r\n" + "{" + "\r\n");
-                writer.Write("if (stringComplete)" + "\r\n" + "{" + "\r\n");
-                writer.Write("if (string[0] == 'I') startFlag = 1;" + "\r\n");
-                writer.Write("if (string[0] == 'F') startFlag = 0;" + "\r\n");
-                writer.Write("if (string[0] == 'S') sp = ((string[1]-48) * 100) + ((string[2]-48) * 10) + (string[3]-48);" + "\r\n");
-                writer.Write("string = \"\";" + "\r\n");
-                writer.Write("stringComplete = false;" + "\r\n" + "}" + "\r\n");
-
-                writer.Write("if (startFlag == 1)" + "\r\n" + "{" + "\r\n");
-                writer.Write("delay(MEASURE_DELAY);" + "\r\n");
-                writer.Write("h = measure();" + "\r\n");
-                //realiza os calculos
-                for (int ind = 0; ind < tbCalculations.Lines.Length; ind++)
-                {
-                    writer.Write(tbCalculations.Lines[ind] + ";" + "\r\n");
-                }
-                //envia valores das variaveis para monitoraçao
-
-                for (int ind = 0; ind < chbVariables.CheckedItems.Count; ind++)
-                {
-                    writer.Write("Serial.print(" + chbVariables.CheckedItems[ind].ToString() + ");" + "\r\n");
-                    writer.Write("Serial.print(\";\");" + "\r\n");
-                }
-
-                writer.Write("analogWrite(SAIDA,u);" + "\r\n" + "}" + "\r\n" + "}" + "\r\n");
-
-                writer.Write("void serialEvent()" + "\r\n" + "{" + "\r\n");
-                writer.Write("while (Serial.available())" + "\r\n" + "{" + "\r\n");
-                writer.Write("char inChar = (char)Serial.read();" + "\r\n");
-                writer.Write("string += inChar;" + "\r\n");
-                writer.Write("if (inChar == 'I')" + "\r\n" + "{" + "\r\n");
-                writer.Write("stringComplete = true;" + "\r\n" + "}" + "\r\n" + "}" + "\r\n" + "}" + "\r\n");
-
-                writer.Write("float measure()" + "\r\n" + "{" + "\r\n");
-                writer.Write("float measureSum = 0;" + "\r\n");
-                writer.Write("for (int i = 0; i < MEASURE_SAMPLES; i++)" + "\r\n" + "{" + "\r\n");
-                writer.Write("delay(MEASURE_SAMPLE_DELAY);" + "\r\n");
-                writer.Write("measureSum += singleMeasurement();" + "\r\n" + "}" + "\r\n");
-                writer.Write("return measureSum / MEASURE_SAMPLES;" + "\r\n" + "}" + "\r\n");
-
-                writer.Write("long singleMeasurement()" + "\r\n" + "{" + "\r\n");
-                writer.Write("long duration = 0;" + "\r\n");
-                writer.Write("digitalWrite(TRIGGER_PIN, HIGH);" + "\r\n");
-                writer.Write("delayMicroseconds(11);" + "\r\n");
-                writer.Write("digitalWrite(TRIGGER_PIN, LOW);" + "\r\n");
-                writer.Write("duration = pulseIn(ECHO_PIN, HIGH);" + "\r\n");
-                writer.Write("return (long) (((float) duration / USONIC_DIV) * 10.0);" + "\r\n" + "}");
-                writer.Close();
-                Console.WriteLine(sfdSave.FileName);
-                return sfdSave.FileName;
-            }
-            return "";
+            string code = createCode("E:\\Programa Nivel-CS\\Nova pasta\\Water-Reservatory-Level-Control\\skeletons\\ultrassonic.txt");
+            return save(
+                "Salvar Arquivo do Compilador",
+                "Compilador|.ino",
+                "Programa",
+                ".ino",
+                currentProjectPath,
+                code
+            );
         }
 
         private string saveChartFile()
         {
-            //define o titulo
-            sfdSave.Title = "Salvar Arquivo do Gráfico";
+            return save(
+                "Salvar Arquivo do Gráfico",
+                "Gráfico|.csv",
+                "Gráfico",
+                ".csv",
+                currentProjectPath,
+                tbExcel1.Text
+            );
+        }
+
+        private string createCode(string skeletonPath)
+        {
+            string fullCode = "";
+            string line;
+            System.IO.StreamReader file = new System.IO.StreamReader(skeletonPath);
+            while ((line = file.ReadLine()) != "//fim")
+            {
+                if (line.Trim().ToString().Equals("//var"))
+                {
+                    for (int ind = 0; ind < chbVariables.Items.Count; ind++)
+                    {
+                        Console.WriteLine("asdadasda");
+                        fullCode = string.Concat(fullCode, "float " + chbVariables.Items[ind] + " = 0;" + "\r\n");
+                    }
+                    continue;
+                }
+                if (line.Trim().ToString().Equals("//law"))
+                {
+                    Console.WriteLine(tbCalculations.Lines.Length);
+                    Console.WriteLine(chbVariables.CheckedItems.Count);
+                    for (int ind = 0; ind < tbCalculations.Lines.Length; ind++)
+                        fullCode = string.Concat(fullCode, tbCalculations.Lines[ind] + ";" + "\r\n");
+
+                    for (int ind = 0; ind < chbVariables.CheckedItems.Count; ind++)
+                        fullCode = string.Concat(
+                            fullCode, 
+                            "Serial.print(" + chbVariables.CheckedItems[ind] + ");" + "\r\n",
+                            "Serial.print(\";\");" + "\r\n"
+                        );
+                    continue;
+                }
+
+                fullCode = string.Concat(fullCode, line + "\r\n");
+            }
+            return fullCode;
+        }
+
+        private string save(
+            string title,
+            string filter,
+            string filename,
+            string defaultExt,
+            string initialDirectory,
+            string content
+        )
+        {
+            sfdSave.Title = title;
             //Define as extensões permitidas
-            sfdSave.Filter = "Gráfico|.csv";
+            sfdSave.Filter = filter;
             //define o indice do filtro
             sfdSave.FilterIndex = 0;
             //Atribui um valor vazio ao nome do arquivo
-            sfdSave.FileName = "Gráfico";
+            sfdSave.FileName = filename;
             //Define a extensão padrão como .h
-            sfdSave.DefaultExt = ".csv";
+            sfdSave.DefaultExt = defaultExt;
             //define o diretório padrão
-            sfdSave.InitialDirectory = currentProjectPath;
+            sfdSave.InitialDirectory = initialDirectory;
             //restaura o diretorio atual antes de fechar a janela
             sfdSave.RestoreDirectory = true;
             //Abre a caixa de dialogo e determina qual botão foi pressionado
@@ -443,17 +384,15 @@ namespace WindowsFormsApp2
             //Se o ousuário pressionar o botão Salvar
             if (result == DialogResult.OK)
             {
-                //pega o diretório onde o arquivo .ino foi salvo
-                //salvando = sfdSalvar.FileName;
                 //Cria um stream usando o nome do arquivo
                 FileStream fs = new FileStream(sfdSave.FileName, FileMode.Create);
                 //Cria um escrito que irá escrever no stream
                 StreamWriter writer = new StreamWriter(fs);
                 //escreve o conteúdo da caixa de texto no stream
-                writer.Write(tbExcel1.Text);
+                writer.Write(content);
+                //fecha o escrito e o stream
                 writer.Close();
 
-                Console.WriteLine(sfdSave.FileName);
                 return sfdSave.FileName;
             }
             return "";
@@ -461,38 +400,14 @@ namespace WindowsFormsApp2
 
         private string saveCommandFile()
         {
-            //define o titulo
-            sfdSave.Title = "Salvar Comando de Compilação";
-            //Define as extensões permitidas
-            sfdSave.Filter = "Prompt|.BAT";
-            //define o indice do filtro
-            sfdSave.FilterIndex = 0;
-            //Atribui um valor vazio ao nome do arquivo
-            sfdSave.FileName = "Compilar";
-            //Define a extensão padrão como .h
-            sfdSave.DefaultExt = ".BAT";
-            //define o diretório padrão
-            sfdSave.InitialDirectory = currentProjectPath;
-            //restaura o diretorio atual antes de fechar a janela
-            sfdSave.RestoreDirectory = true;
-            //Abre a caixa de dialogo e determina qual botão foi pressionado
-            DialogResult result = sfdSave.ShowDialog();
-            //Se o ousuário pressionar o botão Salvar
-            if (result == DialogResult.OK)
-            {
-                //Cria um stream usando o nome do arquivo
-                FileStream fs = new FileStream(sfdSave.FileName, FileMode.Create);
-                //Cria um escrito que irá escrever no stream
-                StreamWriter writer = new StreamWriter(fs);
-                //escreve o conteúdo da caixa de texto no stream
-                writer.Write("\"C:\\Program Files (x86)\\Arduino\\arduino_debug.exe\"" + " --pref " + "\"build.path=C:\\Users\\Public\\Documents\\Arduino\\plantadenivel\\builder\"" + " --verify " + "\"" + salvando + "\"" + "\r\n" + " pause");
-                //fecha o escrito e o stream
-                writer.Close();
-
-                Console.WriteLine(sfdSave.FileName);
-                return sfdSave.FileName;
-            }
-            return "";
+            return save(
+                "Salvar Comando de Compilação",
+                "Prompt|.BAT",
+                "Compilar",
+                ".BAT",
+                currentProjectPath,
+                "\"C:\\Program Files (x86)\\Arduino\\arduino_debug.exe\"" + " --pref " + "\"build.path=C:\\Users\\Public\\Documents\\Arduino\\plantadenivel\\builder\"" + " --verify " + "\"" + inoFilePath + "\"" + "\r\n" + " pause"
+            );
         }
     }
 }

@@ -1,0 +1,78 @@
+#define TRIGGER_PIN 8
+#define ECHO_PIN 7
+#define SAIDA 9
+#define USONIC_DIV 58.0
+#define MEASURE_SAMPLE_DELAY 5
+#define MEASURE_SAMPLES 25
+#define MEASURE_DELAY 100
+bool stringComplete = false;
+int nivel,startFlag;
+String string;
+float sp;
+
+//var
+
+void setup()
+{
+    Serial.begin(9600);
+    pinMode(SAIDA,OUTPUT);
+    pinMode(TRIGGER_PIN, OUTPUT);
+    pinMode(ECHO_PIN, INPUT);
+    digitalWrite(TRIGGER_PIN, LOW);
+    delayMicroseconds(500);
+    TCCR1B = TCCR1B & 0b11111000 | 0X01;
+    startFlag = 0;
+}
+void loop()
+{
+    if (stringComplete)
+    {
+        if (string[0] == 'I') startFlag = 1;
+        if (string[0] == 'F') startFlag = 0;
+        if (string[0] == 'S') sp = ((string[1]-48) * 100) + ((string[2]-48) * 10) + (string[3]-48);
+        string = "";
+        stringComplete = false;
+    }
+    if (startFlag == 1)
+    {
+        delay(MEASURE_DELAY);
+        h = measure();
+
+        //law
+
+        analogWrite(SAIDA,u);
+    }
+}
+void serialEvent()
+{
+    while (Serial.available())
+    {
+        char inChar = (char)Serial.read();
+        string += inChar;
+        if (inChar == 'I')
+        {
+            stringComplete = true;
+        }
+    }
+}
+float measure()
+{
+    float measureSum = 0;
+    for (int i = 0; i < MEASURE_SAMPLES; i++)
+    {
+        delay(MEASURE_SAMPLE_DELAY);
+        measureSum += singleMeasurement();
+    }
+    return measureSum / MEASURE_SAMPLES;
+}
+long singleMeasurement()
+{
+    long duration = 0;
+    digitalWrite(TRIGGER_PIN, HIGH);
+    delayMicroseconds(11);
+    digitalWrite(TRIGGER_PIN, LOW);
+    duration = pulseIn(ECHO_PIN, HIGH);
+    return (long) (((float) duration / USONIC_DIV) * 10.0);
+}
+
+//fim
