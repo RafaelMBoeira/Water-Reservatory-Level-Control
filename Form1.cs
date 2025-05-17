@@ -55,7 +55,7 @@ namespace WindowsFormsApp2
 
         private void skeletonSelected(object sender, EventArgs e)
         {
-            selectedSkeletonPath = skeletonsPath + ((ToolStripItem) sender).Text + ".txt";
+            selectedSkeletonPath = System.IO.Path.Combine(skeletonsPath, ((ToolStripItem) sender).Text + ".txt");
         }
         private void newVariableAdded(object sender, EventArgs e)
         {
@@ -340,18 +340,13 @@ namespace WindowsFormsApp2
                         if (chMonitor.Series.Count > 100)
                             chMonitor.Series.RemoveAt(0);
 
-<<<<<<<<< Temporary merge branch 1
-                        writer.Write(Convert.ToString(Convert.ToInt32(tbPeriodo.Text) * cExcel) + ";" + inputData + ";" + "\r\n");
-=========
                         writer.Write(Convert.ToString(Convert.ToInt32(tbPeriodo.Text) * cExcel) + ";" + inputData + "\r\n");
->>>>>>>>> Temporary merge branch 2
-                        
+
                         cExcel++;
                     }
                     writer.Close();
                 }
             });
-            
         }
         private string save(
             string title,
