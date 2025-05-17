@@ -32,7 +32,13 @@ namespace WindowsFormsApp2
             foreach (string s in SerialPort.GetPortNames())
                 cbPort.Items.Add(s);
 
-            cbPort.SelectedIndex = 0;
+            if (cbPort.Items.Count > 0)
+                cbPort.SelectedIndex = 0;
+            else
+            {
+                lbMessage.Text = "Nenhuma Porta Serial Encontrada.";
+                lbMessage.Visible = true;
+            }
         }
 
         private void updatePorts(object sender, EventArgs e)
@@ -45,7 +51,7 @@ namespace WindowsFormsApp2
         {
             string carregando;
             
-            if (cbPort.SelectedItem != "")
+            if (cbPort.Text != "")
             {
                 sfdLoad.Title = "Salvar Comando de Carregamento do Arduino";
                 sfdLoad.Filter = "Arquivo de Carregamento|.BAT";
@@ -65,7 +71,9 @@ namespace WindowsFormsApp2
             } 
             else
             {
+                lbMessage.Text = "Nenhuma porta foi selecionada.";
                 lbMessage.Visible = true;
+                return;
             }
 
 

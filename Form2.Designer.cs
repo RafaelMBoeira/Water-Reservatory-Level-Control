@@ -76,7 +76,7 @@
             // cbPort
             // 
             this.cbPort.FormattingEnabled = true;
-            this.cbPort.Location = new System.Drawing.Point(85, 41);
+            this.cbPort.Location = new System.Drawing.Point(88, 29);
             this.cbPort.Margin = new System.Windows.Forms.Padding(4);
             this.cbPort.Name = "cbPort";
             this.cbPort.Size = new System.Drawing.Size(160, 24);
@@ -84,17 +84,17 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 9);
+            this.label1.Location = new System.Drawing.Point(11, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(216, 16);
+            this.label1.Size = new System.Drawing.Size(314, 16);
             this.label1.TabIndex = 4;
             this.label1.Text = "Selecione a porta de comunicação";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(85, 73);
+            this.textBox1.Location = new System.Drawing.Point(88, 61);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(160, 22);
@@ -103,15 +103,15 @@
             // 
             // lbMessage
             // 
-            this.lbMessage.AutoSize = true;
-            this.lbMessage.Location = new System.Drawing.Point(96, 99);
+            this.lbMessage.Location = new System.Drawing.Point(8, 99);
             this.lbMessage.Name = "lbMessage";
-            this.lbMessage.Size = new System.Drawing.Size(135, 16);
+            this.lbMessage.Size = new System.Drawing.Size(317, 16);
             this.lbMessage.TabIndex = 6;
-            this.lbMessage.Text = "Selecione uma Porta!";
+            this.lbMessage.Text = "teste";
+            this.lbMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbMessage.Visible = false;
             // 
-            // frmPort
+            // PortSelectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -124,7 +124,7 @@
             this.Controls.Add(this.btSelect);
             this.Controls.Add(this.btUpdate);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "frmPort";
+            this.Name = "PortSelectionForm";
             this.Text = "Porta de Comunicação";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.whenClosed);
             this.ResumeLayout(false);
