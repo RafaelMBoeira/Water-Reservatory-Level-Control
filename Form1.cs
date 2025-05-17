@@ -340,7 +340,11 @@ namespace WindowsFormsApp2
                         if (chMonitor.Series.Count > 100)
                             chMonitor.Series.RemoveAt(0);
 
+<<<<<<<<< Temporary merge branch 1
+                        writer.Write(Convert.ToString(Convert.ToInt32(tbPeriodo.Text) * cExcel) + ";" + inputData + ";" + "\r\n");
+=========
                         writer.Write(Convert.ToString(Convert.ToInt32(tbPeriodo.Text) * cExcel) + ";" + inputData + "\r\n");
+>>>>>>>>> Temporary merge branch 2
                         
                         cExcel++;
                     }
