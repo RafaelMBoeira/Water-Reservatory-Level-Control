@@ -340,14 +340,25 @@ namespace WindowsFormsApp2
                         if (chMonitor.Series.Count > 100)
                             chMonitor.Series.RemoveAt(0);
 
-                        writer.Write(Convert.ToString(Convert.ToInt32(tbPeriodo.Text) * cExcel) + ";" + inputData + "\r\n");
-                        
-                        cExcel++;
-                    }
-                    writer.Close();
+                    for (int ind = 0; ind < chbVariables.CheckedItems.Count; ind++)
+                        fullCode = string.Concat(
+                            fullCode, 
+                            "Serial.print(" + chbVariables.CheckedItems[ind] + ");" + "\r\n",
+                            "Serial.print(\";\");" + "\r\n"
+                        );
+                    continue;
                 }
-            });
-            
+
+                fullCode = string.Concat(fullCode, line + "\r\n");
+            }
+            return fullCode;
+        }
+
+        private void openConfigurations(object sender, EventArgs e)
+        {
+            ConfigurationForm frmConfig = new ConfigurationForm(this);
+            frmConfig.StartPosition = FormStartPosition.CenterParent;
+            frmConfig.Show();
         }
         private string save(
             string title,
