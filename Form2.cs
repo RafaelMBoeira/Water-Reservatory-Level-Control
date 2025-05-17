@@ -81,7 +81,6 @@ namespace WindowsFormsApp2
                     ardPort.Open();
                     ardPort.Write("I;");
                 }
-                frmMain.btSampleSizeChanger.Enabled = true;
                 frmMain.spNivel.PortName = cbPort.Text;
             }
             Close();

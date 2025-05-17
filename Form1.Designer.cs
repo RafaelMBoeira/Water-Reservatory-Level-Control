@@ -29,32 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.tbPeriodo = new System.Windows.Forms.TextBox();
             this.navbar = new System.Windows.Forms.MenuStrip();
             this.btNew = new System.Windows.Forms.ToolStripMenuItem();
             this.btOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.btSave = new System.Windows.Forms.ToolStripMenuItem();
             this.btCompile = new System.Windows.Forms.ToolStripMenuItem();
             this.btLoad = new System.Windows.Forms.ToolStripMenuItem();
-            this.btSaveChart = new System.Windows.Forms.ToolStripMenuItem();
             this.btRun = new System.Windows.Forms.ToolStripMenuItem();
             this.btSimulation = new System.Windows.Forms.ToolStripMenuItem();
             this.btMonitor = new System.Windows.Forms.ToolStripMenuItem();
             this.btSkeletonPicker = new System.Windows.Forms.ToolStripMenuItem();
             this.btConfigurations = new System.Windows.Forms.ToolStripMenuItem();
-            this.chMonitor = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tbVar = new System.Windows.Forms.TextBox();
             this.tbCalculations = new System.Windows.Forms.TextBox();
             this.sfdSave = new System.Windows.Forms.SaveFileDialog();
@@ -62,36 +50,24 @@
             this.spNivel = new System.IO.Ports.SerialPort(this.components);
             this.sfdChart = new System.Windows.Forms.SaveFileDialog();
             this.tmVariaveis = new System.Windows.Forms.Timer(this.components);
-            this.btSampleSizeChanger = new System.Windows.Forms.Button();
             this.chbVariables = new System.Windows.Forms.CheckedListBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pnSimulation = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.navbar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chMonitor)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(791, 385);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(186, 16);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Período de Amostragem (ms):";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(371, 50);
+            this.label2.Location = new System.Drawing.Point(551, 50);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 47);
+            this.label2.Size = new System.Drawing.Size(189, 47);
             this.label2.TabIndex = 9;
             this.label2.Text = "VARIÁVEIS JÁ DEFINIDAS:";
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(371, 97);
+            this.label3.Location = new System.Drawing.Point(551, 97);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(120, 16);
@@ -100,21 +76,12 @@
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(371, 126);
+            this.label4.Location = new System.Drawing.Point(551, 126);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(133, 36);
+            this.label4.Size = new System.Drawing.Size(189, 36);
             this.label4.TabIndex = 11;
             this.label4.Text = "u: Vazão da bomba centrífuga";
-            // 
-            // tbPeriodo
-            // 
-            this.tbPeriodo.Location = new System.Drawing.Point(993, 382);
-            this.tbPeriodo.Margin = new System.Windows.Forms.Padding(4);
-            this.tbPeriodo.Name = "tbPeriodo";
-            this.tbPeriodo.Size = new System.Drawing.Size(115, 22);
-            this.tbPeriodo.TabIndex = 14;
-            this.tbPeriodo.Text = "100";
             // 
             // navbar
             // 
@@ -125,13 +92,12 @@
             this.btSave,
             this.btCompile,
             this.btLoad,
-            this.btSaveChart,
             this.btRun,
             this.btSkeletonPicker,
             this.btConfigurations});
             this.navbar.Location = new System.Drawing.Point(0, 0);
             this.navbar.Name = "navbar";
-            this.navbar.Size = new System.Drawing.Size(1165, 28);
+            this.navbar.Size = new System.Drawing.Size(817, 28);
             this.navbar.TabIndex = 15;
             this.navbar.Text = "menu";
             // 
@@ -170,14 +136,6 @@
             this.btLoad.Text = "Carregar";
             this.btLoad.Click += new System.EventHandler(this.loadProgram);
             // 
-            // btSaveChart
-            // 
-            this.btSaveChart.Enabled = false;
-            this.btSaveChart.Name = "btSaveChart";
-            this.btSaveChart.Size = new System.Drawing.Size(115, 24);
-            this.btSaveChart.Text = "Salvar Gráfico";
-            this.btSaveChart.Click += new System.EventHandler(this.saveChart);
-            // 
             // btRun
             // 
             this.btRun.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -214,59 +172,6 @@
             this.btConfigurations.Text = "Configurações";
             this.btConfigurations.Click += new System.EventHandler(this.openConfigurations);
             // 
-            // chMonitor
-            // 
-            this.chMonitor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            chartArea4.AxisY.Maximum = 310D;
-            chartArea4.AxisY.Minimum = 0D;
-            chartArea4.Name = "ChartArea1";
-            this.chMonitor.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chMonitor.Legends.Add(legend4);
-            this.chMonitor.Location = new System.Drawing.Point(552, 50);
-            this.chMonitor.Margin = new System.Windows.Forms.Padding(4);
-            this.chMonitor.Name = "chMonitor";
-            series16.ChartArea = "ChartArea1";
-            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series16.Legend = "Legend1";
-            series16.Name = "Series1";
-            series16.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series16.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series17.ChartArea = "ChartArea1";
-            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series17.Legend = "Legend1";
-            series17.Name = "Series2";
-            series17.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series17.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series18.ChartArea = "ChartArea1";
-            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series18.Legend = "Legend1";
-            series18.Name = "Series3";
-            series18.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series18.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series19.ChartArea = "ChartArea1";
-            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series19.Legend = "Legend1";
-            series19.Name = "Series4";
-            series19.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series19.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series20.ChartArea = "ChartArea1";
-            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series20.Legend = "Legend1";
-            series20.Name = "Series5";
-            series20.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series20.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            this.chMonitor.Series.Add(series16);
-            this.chMonitor.Series.Add(series17);
-            this.chMonitor.Series.Add(series18);
-            this.chMonitor.Series.Add(series19);
-            this.chMonitor.Series.Add(series20);
-            this.chMonitor.Size = new System.Drawing.Size(600, 314);
-            this.chMonitor.TabIndex = 16;
-            this.chMonitor.Text = "chart1";
-            title4.Name = "Nível d\'Água";
-            this.chMonitor.Titles.Add(title4);
-            // 
             // tbVar
             // 
             this.tbVar.Location = new System.Drawing.Point(16, 50);
@@ -274,7 +179,7 @@
             this.tbVar.Multiline = true;
             this.tbVar.Name = "tbVar";
             this.tbVar.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbVar.Size = new System.Drawing.Size(340, 314);
+            this.tbVar.Size = new System.Drawing.Size(513, 314);
             this.tbVar.TabIndex = 17;
             this.tbVar.Text = "//Declare aqui novas variáveis";
             this.tbVar.TextChanged += new System.EventHandler(this.newVariableAdded);
@@ -305,58 +210,35 @@
             // 
             this.tmVariaveis.Enabled = true;
             // 
-            // btSampleSizeChanger
-            // 
-            this.btSampleSizeChanger.Enabled = false;
-            this.btSampleSizeChanger.Location = new System.Drawing.Point(902, 412);
-            this.btSampleSizeChanger.Margin = new System.Windows.Forms.Padding(4);
-            this.btSampleSizeChanger.Name = "btSampleSizeChanger";
-            this.btSampleSizeChanger.Size = new System.Drawing.Size(116, 28);
-            this.btSampleSizeChanger.TabIndex = 36;
-            this.btSampleSizeChanger.Text = "Mudar Tempo";
-            this.btSampleSizeChanger.UseVisualStyleBackColor = true;
-            this.btSampleSizeChanger.Click += new System.EventHandler(this.btPeriodo_Click);
-            // 
             // chbVariables
             // 
             this.chbVariables.FormattingEnabled = true;
-            this.chbVariables.Location = new System.Drawing.Point(552, 435);
+            this.chbVariables.Location = new System.Drawing.Point(6, 21);
             this.chbVariables.Name = "chbVariables";
-            this.chbVariables.Size = new System.Drawing.Size(185, 395);
+            this.chbVariables.Size = new System.Drawing.Size(245, 395);
             this.chbVariables.TabIndex = 40;
             // 
-            // label6
+            // groupBox1
             // 
-            this.label6.Location = new System.Drawing.Point(549, 385);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(188, 47);
-            this.label6.TabIndex = 41;
-            this.label6.Text = "Selecione Variáveis para Monitoramento:";
-            // 
-            // panel1
-            // 
-            this.pnSimulation.Location = new System.Drawing.Point(794, 451);
-            this.pnSimulation.Name = "panel1";
-            this.pnSimulation.Size = new System.Drawing.Size(358, 379);
-            this.pnSimulation.TabIndex = 42;
+            this.groupBox1.Controls.Add(this.chbVariables);
+            this.groupBox1.Location = new System.Drawing.Point(548, 385);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(257, 445);
+            this.groupBox1.TabIndex = 41;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Variáveis para Monitoramento";
             // 
             // LevelControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1165, 844);
-            this.Controls.Add(this.pnSimulation);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.chbVariables);
-            this.Controls.Add(this.btSampleSizeChanger);
+            this.ClientSize = new System.Drawing.Size(817, 844);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tbCalculations);
             this.Controls.Add(this.tbVar);
-            this.Controls.Add(this.chMonitor);
-            this.Controls.Add(this.tbPeriodo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.navbar);
             this.MainMenuStrip = this.navbar;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -364,14 +246,13 @@
             this.Text = "Water Reservatory Level Control";
             this.navbar.ResumeLayout(false);
             this.navbar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chMonitor)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -389,17 +270,12 @@
         private System.Windows.Forms.ToolStripMenuItem btRun;
         public System.IO.Ports.SerialPort spNivel;
         private System.Windows.Forms.Timer tmVariaveis;
-        public System.Windows.Forms.DataVisualization.Charting.Chart chMonitor;
-        public System.Windows.Forms.Button btSampleSizeChanger;
-        public System.Windows.Forms.ToolStripMenuItem btSaveChart;
-        public System.Windows.Forms.TextBox tbPeriodo;
-        private System.Windows.Forms.CheckedListBox chbVariables;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ToolStripMenuItem btSkeletonPicker;
         private System.Windows.Forms.ToolStripMenuItem btConfigurations;
         private System.Windows.Forms.ToolStripMenuItem btSimulation;
         private System.Windows.Forms.ToolStripMenuItem btMonitor;
-        private System.Windows.Forms.Panel pnSimulation;
+        private System.Windows.Forms.CheckedListBox chbVariables;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

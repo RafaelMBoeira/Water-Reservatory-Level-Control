@@ -130,3 +130,4 @@ E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\Window
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.PortSelectionForm.resources
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.ConfigurationForm.resources
 E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.MonitoringForm.resources
+E:\Programa Nivel-CS\Nova pasta\Water-Reservatory-Level-Control\obj\Debug\WindowsFormsApp2.SimulationForm.resources

@@ -48,7 +48,6 @@ namespace WindowsFormsApp2
                 
                     selectedSkeletonPath = path;
                 }
-            chMonitor.Series.Clear();
         }
 
         private void skeletonSelected(object sender, EventArgs e)
@@ -79,12 +78,8 @@ namespace WindowsFormsApp2
         {
             tbVar.Focus();
             currentProjectPath = Properties.Settings.Default.DefaultSavePath;
-            chMonitor.Series.Clear();
             tbVar.Text = "";
             tbCalculations.Text = "";
-            tbPeriodo.Text = "100";
-            btSampleSizeChanger.Enabled = false;
-            btSaveChart.Enabled = false;
             tmSample.Enabled = false;
             spNivel.Close();
             sampleCount = 0;
@@ -346,13 +341,6 @@ namespace WindowsFormsApp2
             ConfigurationForm frmConfig = new ConfigurationForm(this);
             frmConfig.StartPosition = FormStartPosition.CenterParent;
             frmConfig.Show();
-        }
-        private void btPeriodo_Click(object sender, EventArgs e)
-        {
-            tmSample.Interval = Convert.ToInt32(tbPeriodo.Text);
-            if (spNivel.IsOpen == false)
-                spNivel.Open();
-            spNivel.Write("T" + tbPeriodo.Text);
         }
 
         private void startSimulation(object sender, EventArgs e)
