@@ -131,25 +131,25 @@ namespace WindowsFormsApp2
             
             //verifica se existe algo digitado na caixa de texto
             if (string.IsNullOrEmpty(tbVar.Text))
-                {
-                    MessageBox.Show("Informe algo na caixa de texto das Variáveis");
-                    return;
-                }
-                if (tbVar.Text == "//Declare aqui novas variáveis")
-                {
-                    MessageBox.Show("Informe novas variáveis");
-                    return;
-                }
-                if (string.IsNullOrEmpty(tbCalculations.Text))
-                {
-                    MessageBox.Show("Informe algo na caixa de texto da lei de controle");
-                    return;
-                }
-                if (tbCalculations.Text == "//Digite aqui sua lei de controle")
-                {
-                    MessageBox.Show("Informe sua lei de controle");
-                    return;
-                }
+            {
+                MessageBox.Show("Informe algo na caixa de texto das Variáveis");
+                return;
+            }
+            if (tbVar.Text == "//Declare aqui novas variáveis")
+            {
+                MessageBox.Show("Informe novas variáveis");
+                return;
+            }
+            if (string.IsNullOrEmpty(tbCalculations.Text))
+            {
+                MessageBox.Show("Informe algo na caixa de texto da lei de controle");
+                return;
+            }
+            if (tbCalculations.Text == "//Digite aqui sua lei de controle")
+            {
+                MessageBox.Show("Informe sua lei de controle");
+                return;
+            }
 
             currentProjectPath = saveCompilationFile();
             inoFilePath = currentProjectPath;
