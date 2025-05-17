@@ -124,9 +124,7 @@ namespace WindowsFormsApp2
                     ardPort.Open();
                     ardPort.Write("I;");
                 }
-                form1.btVar.Enabled = false;
-                form1.btPeriodo.Enabled = true;
-                form1.btMod.Enabled = true;
+                form1.btSampleSizeChanger.Enabled = true;
                 form1.spNivel.PortName = cbPorta.Text;
             }
             load_s = 1;
