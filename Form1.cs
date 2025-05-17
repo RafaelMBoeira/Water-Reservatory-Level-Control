@@ -135,7 +135,7 @@ namespace WindowsFormsApp2
         {
             string variables = tbVar.Text.Trim();
             string controlLaw = tbCalculations.Text.Trim();
-
+            //verifica se existe algo digitado na caixa de texto
             if (string.IsNullOrEmpty(variables))
             {
                 MessageBox.Show("Informe algo na caixa de texto das Variáveis");
@@ -212,8 +212,8 @@ namespace WindowsFormsApp2
             if (!string.IsNullOrEmpty(csvPath))
                 compilerPath = saveCommandFile();
 
-            if (!string.IsNullOrEmpty(compilerPath))
-                System.Diagnostics.Process.Start(compilerPath);
+            //if (!string.IsNullOrEmpty(compilerPath))
+            //    System.Diagnostics.Process.Start(compilerPath);
         }
         private string createCode(string skeletonPath)
         {
@@ -341,6 +341,7 @@ namespace WindowsFormsApp2
                             chMonitor.Series.RemoveAt(0);
 
                         writer.Write(Convert.ToString(Convert.ToInt32(tbPeriodo.Text) * cExcel) + ";" + inputData + "\r\n");
+                        
                         cExcel++;
                     }
                     writer.Close();
