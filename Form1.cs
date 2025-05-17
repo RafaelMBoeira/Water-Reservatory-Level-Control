@@ -135,7 +135,7 @@ namespace WindowsFormsApp2
         {
             string variables = tbVar.Text.Trim();
             string controlLaw = tbCalculations.Text.Trim();
-            //verifica se existe algo digitado na caixa de texto
+
             if (string.IsNullOrEmpty(variables))
             {
                 MessageBox.Show("Informe algo na caixa de texto das Variáveis");
