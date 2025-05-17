@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,7 +51,8 @@
             this.btSaveChart = new System.Windows.Forms.ToolStripMenuItem();
             this.btRun = new System.Windows.Forms.ToolStripMenuItem();
             this.btSkeletonPicker = new System.Windows.Forms.ToolStripMenuItem();
-            this.chNivel = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btConfigurations = new System.Windows.Forms.ToolStripMenuItem();
+            this.chMonitor = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tbVar = new System.Windows.Forms.TextBox();
             this.tbCalculations = new System.Windows.Forms.TextBox();
             this.sfdSave = new System.Windows.Forms.SaveFileDialog();
@@ -67,9 +68,8 @@
             this.btSampleSizeChanger = new System.Windows.Forms.Button();
             this.chbVariables = new System.Windows.Forms.CheckedListBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.btConfigurations = new System.Windows.Forms.ToolStripMenuItem();
             this.navbar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chNivel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chMonitor)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -193,58 +193,65 @@
             this.btSkeletonPicker.Size = new System.Drawing.Size(161, 24);
             this.btSkeletonPicker.Text = "Selecionar Esqueleto";
             // 
-            // chNivel
+            // btConfigurations
             // 
-            this.chNivel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            chartArea2.AxisY.Maximum = 310D;
-            chartArea2.AxisY.Minimum = 0D;
-            chartArea2.Name = "ChartArea1";
-            this.chNivel.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chNivel.Legends.Add(legend2);
-            this.chNivel.Location = new System.Drawing.Point(552, 50);
-            this.chNivel.Margin = new System.Windows.Forms.Padding(4);
-            this.chNivel.Name = "chNivel";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            series6.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series6.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Legend = "Legend1";
-            series7.Name = "Series2";
-            series7.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series7.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Legend = "Legend1";
-            series8.Name = "Series3";
-            series8.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series8.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Legend = "Legend1";
-            series9.Name = "Series4";
-            series9.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series9.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series10.Legend = "Legend1";
-            series10.Name = "Series5";
-            series10.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            series10.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
-            this.chNivel.Series.Add(series6);
-            this.chNivel.Series.Add(series7);
-            this.chNivel.Series.Add(series8);
-            this.chNivel.Series.Add(series9);
-            this.chNivel.Series.Add(series10);
-            this.chNivel.Size = new System.Drawing.Size(600, 314);
-            this.chNivel.TabIndex = 16;
-            this.chNivel.Text = "chart1";
-            title2.Name = "Nível d\'Água";
-            this.chNivel.Titles.Add(title2);
+            this.btConfigurations.Name = "btConfigurations";
+            this.btConfigurations.Size = new System.Drawing.Size(118, 24);
+            this.btConfigurations.Text = "Configurações";
+            this.btConfigurations.Click += new System.EventHandler(this.openConfigurations);
+            // 
+            // chMonitor
+            // 
+            this.chMonitor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            chartArea1.AxisY.Maximum = 310D;
+            chartArea1.AxisY.Minimum = 0D;
+            chartArea1.Name = "ChartArea1";
+            this.chMonitor.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chMonitor.Legends.Add(legend1);
+            this.chMonitor.Location = new System.Drawing.Point(552, 50);
+            this.chMonitor.Margin = new System.Windows.Forms.Padding(4);
+            this.chMonitor.Name = "chMonitor";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Series2";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Series3";
+            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series3.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.Name = "Series4";
+            series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Legend = "Legend1";
+            series5.Name = "Series5";
+            series5.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            series5.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            this.chMonitor.Series.Add(series1);
+            this.chMonitor.Series.Add(series2);
+            this.chMonitor.Series.Add(series3);
+            this.chMonitor.Series.Add(series4);
+            this.chMonitor.Series.Add(series5);
+            this.chMonitor.Size = new System.Drawing.Size(600, 314);
+            this.chMonitor.TabIndex = 16;
+            this.chMonitor.Text = "chart1";
+            title1.Name = "Nível d\'Água";
+            this.chMonitor.Titles.Add(title1);
             // 
             // tbVar
             // 
@@ -362,13 +369,6 @@
             this.label6.TabIndex = 41;
             this.label6.Text = "Selecione Variáveis para Monitoramento:";
             // 
-            // configuraçõesToolStripMenuItem
-            // 
-            this.btConfigurations.Name = "configuraçõesToolStripMenuItem";
-            this.btConfigurations.Size = new System.Drawing.Size(118, 24);
-            this.btConfigurations.Text = "Configurações";
-            this.btConfigurations.Click += new System.EventHandler(this.openConfigurations);
-            // 
             // LevelControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -384,7 +384,7 @@
             this.Controls.Add(this.tbExcel1);
             this.Controls.Add(this.tbCalculations);
             this.Controls.Add(this.tbVar);
-            this.Controls.Add(this.chNivel);
+            this.Controls.Add(this.chMonitor);
             this.Controls.Add(this.tbPeriodo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -397,7 +397,7 @@
             this.Text = "Water Reservatory Level Control";
             this.navbar.ResumeLayout(false);
             this.navbar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chNivel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chMonitor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -427,7 +427,7 @@
         private System.Windows.Forms.TextBox tbExcel3;
         private System.Windows.Forms.TextBox tbExcel4;
         private System.Windows.Forms.TextBox tbExcel5;
-        public System.Windows.Forms.DataVisualization.Charting.Chart chNivel;
+        public System.Windows.Forms.DataVisualization.Charting.Chart chMonitor;
         public System.Windows.Forms.Button btSampleSizeChanger;
         public System.Windows.Forms.ToolStripMenuItem btSaveChart;
         public System.Windows.Forms.TextBox tbPeriodo;

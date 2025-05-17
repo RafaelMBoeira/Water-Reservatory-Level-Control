@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Text.RegularExpressions;
 
 namespace WindowsFormsApp2
 {
@@ -18,9 +20,13 @@ namespace WindowsFormsApp2
         private string skeletonsPath;
         private string selectedSkeletonPath;
         private string inoFilePath;
+        private string csvPath = "";
+        private string compilerPath = "";
+        private ConcurrentQueue<string> receivedDataQueue = new ConcurrentQueue<string>();
         Dictionary<int, string> variables = new Dictionary<int, string>();
         string inputData;
         int cExcel = 0;
+        bool running = false;
 
         public string salvando, compilando, graphic;
         public LevelControlForm()
@@ -44,13 +50,33 @@ namespace WindowsFormsApp2
                 
                     selectedSkeletonPath = path;
                 }
+            chMonitor.Series.Clear();
         }
 
         private void skeletonSelected(object sender, EventArgs e)
         {
             selectedSkeletonPath = skeletonsPath + ((ToolStripItem) sender).Text + ".txt";
         }
+        private void newVariableAdded(object sender, EventArgs e)
+        {
+            int i = 0;
+            chbVariables.Items.Clear();
+            chbVariables.Items.Add("h");
+            chbVariables.Items.Add("u");
+            variables.Clear();
 
+            foreach (string s in tbVar.Lines)
+            {
+                string validVariable = Regex.Replace(s, "[^a-zA-Z]", "").Trim();
+
+                if (string.IsNullOrEmpty(validVariable))
+                    continue;
+
+                chbVariables.Items.Add(validVariable);
+                variables.Add(i, validVariable);
+                i++;
+            }
+        }
         private void newFile(object sender, EventArgs e)
         {
             tbVar.Focus();
@@ -60,9 +86,9 @@ namespace WindowsFormsApp2
             tbExcel3.Text = "";
             tbExcel4.Text = "";
             tbExcel5.Text = "";
-            chNivel.Series.Clear();
-            tbVar.Text = " ";
-            tbCalculations.Text = " ";
+            chMonitor.Series.Clear();
+            tbVar.Text = "";
+            tbCalculations.Text = "";
             tbPeriodo.Text = "100";
             btSampleSizeChanger.Enabled = false;
             btSaveChart.Enabled = false;
@@ -70,7 +96,6 @@ namespace WindowsFormsApp2
             spNivel.Close();
             cExcel = 0;
         }
-        
         private void openFile(object sender, EventArgs e)
         {
             string line;
@@ -103,11 +128,9 @@ namespace WindowsFormsApp2
                         tbCalculations.Text += line;
                         tbCalculations.Text += "\r\n";
                     }
-
                 }
             }
         }
-
         private void saveFile(object sender, EventArgs e)
         {
             string variables = tbVar.Text.Trim();
@@ -145,11 +168,8 @@ namespace WindowsFormsApp2
 
             return;
         }
-
         private void compile(object sender, EventArgs e)
         {            
-            
-            //verifica se existe algo digitado na caixa de texto
             if (string.IsNullOrEmpty(tbVar.Text))
             {
                 MessageBox.Show("Informe algo na caixa de texto das Variáveis");
@@ -183,175 +203,18 @@ namespace WindowsFormsApp2
                 return;
             }
 
-            currentProjectPath = saveCompilationFile();
-            inoFilePath = currentProjectPath;
-            if (!string.IsNullOrEmpty(currentProjectPath))
-                currentProjectPath = saveChartFile();
+            inoFilePath = saveCompilationFile();
+            currentProjectPath = System.IO.Path.GetFullPath(inoFilePath);
 
-            if (!string.IsNullOrEmpty(currentProjectPath))
-                currentProjectPath = saveCommandFile();
+            if (!string.IsNullOrEmpty(inoFilePath))
+                csvPath = saveChartFile();
 
-            //if (!string.IsNullOrEmpty(currentProjectPath))
-            //    System.Diagnostics.Process.Start(compilando);
+            if (!string.IsNullOrEmpty(csvPath))
+                compilerPath = saveCommandFile();
+
+            //if (!string.IsNullOrEmpty(compilerPath))
+            //    System.Diagnostics.Process.Start(compilerPath);
         }
-
-        private void loadProgram(object sender, EventArgs e)
-        {
-            PortSelectionForm frmPort = new PortSelectionForm(this, inoFilePath);
-            frmPort.StartPosition = FormStartPosition.CenterParent;
-            frmPort.Show();
-        }
-
-        private void saveChart(object sender, EventArgs e)
-        {
-            //define o titulo
-            sfdChart.Title = "Salvar Arquivo do Excel";
-            //Define as extensões permitidas
-            sfdChart.Filter = "CSV|.csv";
-            //define o indice do filtro
-            sfdChart.FilterIndex = 0;
-            //Atribui um valor vazio ao nome do arquivo
-            sfdChart.FileName = "Tabela";
-            //Define a extensão padrão como .csv
-            sfdChart.DefaultExt = ".csv";
-            //define o diretório padrão
-            sfdChart.InitialDirectory = @"C:\";
-            //restaura o diretorio atual antes de fechar a janela
-            sfdChart.RestoreDirectory = true;
-            //Abre a caixa de dialogo e determina qual botão foi pressionado
-            DialogResult resultado = sfdChart.ShowDialog();
-            //Se o ousuário pressionar o botão Salvar
-            if (resultado == DialogResult.OK)
-            {
-                //pega o diretório onde o arquivo .ino foi salvo
-                //salvando = sfdSalvar.FileName;
-                //Cria um stream usando o nome do arquivo
-                FileStream fs = new FileStream(sfdChart.FileName, FileMode.Create);
-                //Cria um escrito que irá escrever no stream
-                StreamWriter writer = new StreamWriter(fs);
-                //escreve o conteúdo da caixa de texto no stream
-                writer.Write(tbExcel1.Text + "\r\n");
-                writer.Write(tbExcel2.Text + "\r\n");
-                writer.Write(tbExcel3.Text + "\r\n");
-                writer.Write(tbExcel4.Text + "\r\n");
-                writer.Write(tbExcel5.Text + "\r\n");
-                //fecha o escrito e o stream
-                writer.Close();
-            }
-            else
-            {
-                //exibe mensagem informando que a operação foi cancelada
-                MessageBox.Show("Operação cancelada");
-            }
-        }
-
-        private void newVariableAdded(object sender, EventArgs e)
-        {
-            int i = 0;
-            chbVariables.Items.Clear();
-            chbVariables.Items.Add("h");
-            chbVariables.Items.Add("u");
-            variables.Clear();
-
-            foreach (string s in tbVar.Lines)
-            {
-                string validVariable = Regex.Replace(s, "[^a-zA-Z]", "").Trim();
-
-                if (string.IsNullOrEmpty(validVariable))
-                    continue;
-
-                chbVariables.Items.Add(validVariable);
-                variables.Add(i, validVariable);
-                i++;
-            }
-        }
-
-        private void startSimulation(object sender, EventArgs e)
-        {
-            if (btRun.Text.Equals("Iniciar"))
-            {
-                if (spNivel.IsOpen == false)
-                    spNivel.Open();
-                spNivel.Write("I");
-                btRun.Text = "Parar";
-                btSaveChart.Enabled = true;
-                return;
-            }
-
-            if (btRun.Text.Equals("Parar"))
-            {
-                spNivel.Open();
-                spNivel.Write("F");
-                spNivel.Close();
-                cExcel = 0;
-                btRun.Text = "Iniciar";
-                btSaveChart.Enabled = false;
-                return;
-            }
-
-        }
-        private void threatDataReceived()
-        {
-            string[] varValues = inputData.Split(';');
-
-            int i = 0;
-            foreach (string value in varValues)
-            {
-                chNivel.Series[i].Points.AddXY(Convert.ToInt64(tbPeriodo.Text) * cExcel, Convert.ToDouble(value));
-            }
-
-            if (chNivel.Series.Count > 100)
-                chNivel.Series.RemoveAt(0);
-
-            using (StreamWriter writer = new StreamWriter(graphic, true))
-            {
-                writer.Write(inputData + ";" + Convert.ToString(Convert.ToInt32(tbPeriodo.Text) * cExcel) + ";" + "\r\n");
-                writer.Close();
-            }
-            cExcel++;
-            spNivel.Open();
-        }
-
-        private void dataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        {
-            inputData = spNivel.ReadLine();
-            spNivel.Close();
-            threatDataReceived();
-        }
-
-        private void btPeriodo_Click(object sender, EventArgs e)
-        {
-            tmSample.Interval = Convert.ToInt32(tbPeriodo.Text);
-            if (spNivel.IsOpen == false)
-                spNivel.Open();
-            spNivel.Write("T"+tbPeriodo.Text);
-        }
-
-        private string saveCompilationFile()
-        {
-            string code = createCode(selectedSkeletonPath);
-            return save(
-                "Salvar Arquivo do Compilador",
-                "Compilador|.ino",
-                "Programa",
-                ".ino",
-                currentProjectPath,
-                code
-            );
-        }
-
-        private string saveChartFile()
-        {
-            return save(
-                "Salvar Arquivo do Gráfico",
-                "Gráfico|.csv",
-                "Gráfico",
-                ".csv",
-                currentProjectPath,
-                tbExcel1.Text
-            );
-        }
-
         private string createCode(string skeletonPath)
         {
             string fullCode = "";
@@ -371,10 +234,10 @@ namespace WindowsFormsApp2
                     for (int ind = 0; ind < tbCalculations.Lines.Length; ind++)
                         fullCode = string.Concat(fullCode, tbCalculations.Lines[ind] + ";" + "\r\n");
 
-                    for (int ind = 0; ind < chbVariables.CheckedItems.Count; ind++)
+                    foreach (string variable in chbVariables.CheckedItems)
                         fullCode = string.Concat(
-                            fullCode, 
-                            "Serial.print(" + chbVariables.CheckedItems[ind] + ");" + "\r\n",
+                            fullCode,
+                            "Serial.print(" + variable + ");" + "\r\n",
                             "Serial.print(\";\");" + "\r\n"
                         );
                     continue;
@@ -384,14 +247,108 @@ namespace WindowsFormsApp2
             }
             return fullCode;
         }
-
-        private void openConfigurations(object sender, EventArgs e)
+        private void loadProgram(object sender, EventArgs e)
         {
-            ConfigurationForm frmConfig = new ConfigurationForm(this);
-            frmConfig.StartPosition = FormStartPosition.CenterParent;
-            frmConfig.Show();
+            PortSelectionForm frmPort = new PortSelectionForm(this, inoFilePath);
+            frmPort.StartPosition = FormStartPosition.CenterParent;
+            frmPort.Show();
         }
+        private void saveChart(object sender, EventArgs e)
+        {
+            sfdChart.Title = "Salvar Arquivo do Excel";
+            sfdChart.Filter = "CSV|.csv";
+            sfdChart.FilterIndex = 0;
+            sfdChart.FileName = "Tabela";
+            sfdChart.DefaultExt = ".csv";
+            sfdChart.InitialDirectory = currentProjectPath;
+            sfdChart.RestoreDirectory = true;
+            DialogResult resultado = sfdChart.ShowDialog();
+            if (resultado == DialogResult.OK)
+            {
+                FileStream fs = new FileStream(sfdChart.FileName, FileMode.Create);
+                StreamWriter writer = new StreamWriter(fs);
+                writer.Write(tbExcel1.Text + "\r\n");
+                writer.Write(tbExcel2.Text + "\r\n");
+                writer.Write(tbExcel3.Text + "\r\n");
+                writer.Write(tbExcel4.Text + "\r\n");
+                writer.Write(tbExcel5.Text + "\r\n");
+                writer.Close();
+            }
+        }
+        private void startSimulation(object sender, EventArgs e)
+        {
+            
+            if (btRun.Text.Equals("Iniciar"))
+            {
+                try
+                {
+                    if (spNivel.IsOpen == false)
+                        spNivel.Open();
+                    spNivel.Write("I");
+                } 
+                catch
+                {
+                    MessageBox.Show("Porta não encontrada ou não está disponível.");
+                    return;
+                }
+                running = true;
 
+                chMonitor.Series.Clear();
+                foreach (string variable in chbVariables.CheckedItems)
+                    chMonitor.Series.Add(variable);
+
+                btRun.Text = "Parar";
+                btSaveChart.Enabled = true;
+                startThreatingDataReceived();
+                return;
+            }
+
+            if (btRun.Text.Equals("Parar"))
+            {
+                spNivel.Close();
+                running = false;
+                cExcel = 0;
+                btRun.Text = "Iniciar";
+                btSaveChart.Enabled = false;
+                return;
+            }
+
+        }
+        private void dataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            inputData = spNivel.ReadLine();
+            spNivel.Close();
+            receivedDataQueue.Enqueue(inputData);
+        }
+        private void startThreatingDataReceived()
+        {
+            Task.Run(() =>
+            {
+                using (StreamWriter writer = new StreamWriter(csvPath, append: true))
+                {
+                    while (running)
+                    {
+                        if (receivedDataQueue.IsEmpty)
+                            continue;
+
+                        string[] varValues = inputData.Split(';');
+
+                        int i = 0;
+                        foreach (string value in varValues)
+                            chMonitor.Series[i].Points.AddXY(Convert.ToInt64(tbPeriodo.Text) * cExcel, Convert.ToDouble(value));
+
+                        if (chMonitor.Series.Count > 100)
+                            chMonitor.Series.RemoveAt(0);
+
+                        writer.Write(Convert.ToString(Convert.ToInt32(tbPeriodo.Text) * cExcel) + ";" + inputData + "\r\n");
+                        
+                        cExcel++;
+                    }
+                    writer.Close();
+                }
+            });
+            
+        }
         private string save(
             string title,
             string filter,
@@ -420,7 +377,33 @@ namespace WindowsFormsApp2
             }
             return "";
         }
+        private string saveCompilationFile()
+        {
+            string code = createCode(selectedSkeletonPath);
+            return save(
+                "Salvar Arquivo do Compilador",
+                "Compilador|.ino",
+                "Programa",
+                ".ino",
+                inoFilePath,
+                code
+            );
+        }
+        private string saveChartFile()
+        {
+            string header = "time;";
+            foreach (string variable in chbVariables.CheckedItems)
+                header = string.Concat(header, variable,";");
 
+            return save(
+                "Salvar Arquivo do Gráfico",
+                "Gráfico|.csv",
+                "Gráfico",
+                ".csv",
+                csvPath,
+                header+"\r\n"
+            );
+        }
         private string saveCommandFile()
         {
             return save(
@@ -431,6 +414,19 @@ namespace WindowsFormsApp2
                 currentProjectPath,
                 "\"C:\\Program Files (x86)\\Arduino\\arduino_debug.exe\"" + " --pref " + "\"build.path=C:\\Users\\Public\\Documents\\Arduino\\plantadenivel\\builder\"" + " --verify " + "\"" + inoFilePath + "\"" + "\r\n" + " pause"
             );
+        }
+        private void openConfigurations(object sender, EventArgs e)
+        {
+            ConfigurationForm frmConfig = new ConfigurationForm(this);
+            frmConfig.StartPosition = FormStartPosition.CenterParent;
+            frmConfig.Show();
+        }
+        private void btPeriodo_Click(object sender, EventArgs e)
+        {
+            tmSample.Interval = Convert.ToInt32(tbPeriodo.Text);
+            if (spNivel.IsOpen == false)
+                spNivel.Open();
+            spNivel.Write("T" + tbPeriodo.Text);
         }
     }
 }
