@@ -345,6 +345,9 @@ namespace WindowsFormsApp2
 
         private void startSimulation(object sender, EventArgs e)
         {
+            SimulationForm frmSim = new SimulationForm(this);
+            frmSim.StartPosition = FormStartPosition.CenterParent;
+            frmSim.Show();
         }
     }
 }
