@@ -112,7 +112,9 @@
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btSelect);
             this.Controls.Add(this.btUpdate);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "PortSelectionForm";
             this.Text = "Porta de Comunicação";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.whenClosed);

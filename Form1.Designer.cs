@@ -52,22 +52,26 @@
             this.tmVariaveis = new System.Windows.Forms.Timer(this.components);
             this.chbVariables = new System.Windows.Forms.CheckedListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.navbar.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(551, 50);
+            this.label2.Location = new System.Drawing.Point(476, 50);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(189, 47);
+            this.label2.Size = new System.Drawing.Size(189, 26);
             this.label2.TabIndex = 9;
             this.label2.Text = "VARIÁVEIS JÁ DEFINIDAS:";
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(551, 97);
+            this.label3.Location = new System.Drawing.Point(476, 97);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(120, 16);
@@ -76,7 +80,7 @@
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(551, 126);
+            this.label4.Location = new System.Drawing.Point(476, 126);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(189, 36);
@@ -97,7 +101,7 @@
             this.btConfigurations});
             this.navbar.Location = new System.Drawing.Point(0, 0);
             this.navbar.Name = "navbar";
-            this.navbar.Size = new System.Drawing.Size(817, 28);
+            this.navbar.Size = new System.Drawing.Size(746, 28);
             this.navbar.TabIndex = 15;
             this.navbar.Text = "menu";
             // 
@@ -148,14 +152,14 @@
             // btSimulation
             // 
             this.btSimulation.Name = "btSimulation";
-            this.btSimulation.Size = new System.Drawing.Size(224, 26);
+            this.btSimulation.Size = new System.Drawing.Size(196, 26);
             this.btSimulation.Text = "Simulação";
             this.btSimulation.Click += new System.EventHandler(this.startSimulation);
             // 
             // btMonitor
             // 
             this.btMonitor.Name = "btMonitor";
-            this.btMonitor.Size = new System.Drawing.Size(224, 26);
+            this.btMonitor.Size = new System.Drawing.Size(196, 26);
             this.btMonitor.Text = "Monitoramento";
             this.btMonitor.Click += new System.EventHandler(this.startMonitoring);
             // 
@@ -174,12 +178,12 @@
             // 
             // tbVar
             // 
-            this.tbVar.Location = new System.Drawing.Point(16, 50);
+            this.tbVar.Location = new System.Drawing.Point(7, 22);
             this.tbVar.Margin = new System.Windows.Forms.Padding(4);
             this.tbVar.Multiline = true;
             this.tbVar.Name = "tbVar";
             this.tbVar.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbVar.Size = new System.Drawing.Size(513, 314);
+            this.tbVar.Size = new System.Drawing.Size(437, 292);
             this.tbVar.TabIndex = 17;
             this.tbVar.Text = "//Declare aqui novas variáveis";
             this.tbVar.TextChanged += new System.EventHandler(this.newVariableAdded);
@@ -187,13 +191,13 @@
             // tbCalculations
             // 
             this.tbCalculations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbCalculations.Location = new System.Drawing.Point(16, 385);
+            this.tbCalculations.Location = new System.Drawing.Point(7, 22);
             this.tbCalculations.Margin = new System.Windows.Forms.Padding(4);
             this.tbCalculations.Multiline = true;
             this.tbCalculations.Name = "tbCalculations";
             this.tbCalculations.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbCalculations.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbCalculations.Size = new System.Drawing.Size(513, 445);
+            this.tbCalculations.Size = new System.Drawing.Size(437, 411);
             this.tbCalculations.TabIndex = 18;
             this.tbCalculations.Text = "//Digite aqui sua lei de controle";
             // 
@@ -215,38 +219,64 @@
             this.chbVariables.FormattingEnabled = true;
             this.chbVariables.Location = new System.Drawing.Point(6, 21);
             this.chbVariables.Name = "chbVariables";
-            this.chbVariables.Size = new System.Drawing.Size(245, 395);
+            this.chbVariables.Size = new System.Drawing.Size(245, 412);
             this.chbVariables.TabIndex = 40;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.chbVariables);
-            this.groupBox1.Location = new System.Drawing.Point(548, 385);
+            this.groupBox1.Location = new System.Drawing.Point(473, 384);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(257, 445);
+            this.groupBox1.Size = new System.Drawing.Size(257, 448);
             this.groupBox1.TabIndex = 41;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Variáveis para Monitoramento";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tbVar);
+            this.groupBox2.Location = new System.Drawing.Point(16, 50);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(451, 328);
+            this.groupBox2.TabIndex = 42;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Declaração de Variáveis";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tbCalculations);
+            this.groupBox3.Location = new System.Drawing.Point(16, 384);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(451, 448);
+            this.groupBox3.TabIndex = 43;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Lei de Controle";
             // 
             // LevelControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(817, 844);
+            this.ClientSize = new System.Drawing.Size(746, 844);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.tbCalculations);
-            this.Controls.Add(this.tbVar);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.navbar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.navbar;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "LevelControlForm";
             this.Text = "Water Reservatory Level Control";
             this.navbar.ResumeLayout(false);
             this.navbar.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,6 +306,8 @@
         private System.Windows.Forms.ToolStripMenuItem btMonitor;
         private System.Windows.Forms.CheckedListBox chbVariables;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 

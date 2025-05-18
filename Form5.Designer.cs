@@ -28,15 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.cbControlTypes = new System.Windows.Forms.ComboBox();
             this.chSim = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btSim = new System.Windows.Forms.ToolStripMenuItem();
             this.btExit = new System.Windows.Forms.ToolStripMenuItem();
             this.gbxVariables = new System.Windows.Forms.GroupBox();
+            this.tbDecay = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbPower = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tbGain = new System.Windows.Forms.TextBox();
             this.tbCurrent = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,12 +49,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gbxControl = new System.Windows.Forms.GroupBox();
             this.gbxSample = new System.Windows.Forms.GroupBox();
-            this.gbxSimTime = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbPower = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbDecay = new System.Windows.Forms.TextBox();
             this.tbSampleTime = new System.Windows.Forms.TextBox();
+            this.gbxSimTime = new System.Windows.Forms.GroupBox();
             this.tbSimTime = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chSim)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -72,20 +72,19 @@
             this.cbControlTypes.Name = "cbControlTypes";
             this.cbControlTypes.Size = new System.Drawing.Size(188, 24);
             this.cbControlTypes.TabIndex = 0;
-            this.cbControlTypes.SelectionChangeCommitted += new System.EventHandler(this.changeControlType);
             // 
             // chSim
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chSim.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chSim.Legends.Add(legend2);
+            chartArea5.Name = "ChartArea1";
+            this.chSim.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chSim.Legends.Add(legend5);
             this.chSim.Location = new System.Drawing.Point(12, 45);
             this.chSim.Name = "chSim";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chSim.Series.Add(series2);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chSim.Series.Add(series5);
             this.chSim.Size = new System.Drawing.Size(776, 300);
             this.chSim.TabIndex = 1;
             this.chSim.Text = "chart1";
@@ -118,6 +117,9 @@
             // 
             // gbxVariables
             // 
+            this.gbxVariables.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbxVariables.Controls.Add(this.tbDecay);
             this.gbxVariables.Controls.Add(this.label5);
             this.gbxVariables.Controls.Add(this.tbPower);
@@ -128,12 +130,44 @@
             this.gbxVariables.Controls.Add(this.tbTarget);
             this.gbxVariables.Controls.Add(this.label2);
             this.gbxVariables.Controls.Add(this.label1);
-            this.gbxVariables.Location = new System.Drawing.Point(218, 364);
+            this.gbxVariables.Location = new System.Drawing.Point(375, 390);
             this.gbxVariables.Name = "gbxVariables";
             this.gbxVariables.Size = new System.Drawing.Size(248, 226);
             this.gbxVariables.TabIndex = 7;
             this.gbxVariables.TabStop = false;
             this.gbxVariables.Text = "Variáveis";
+            // 
+            // tbDecay
+            // 
+            this.tbDecay.Location = new System.Drawing.Point(130, 141);
+            this.tbDecay.Name = "tbDecay";
+            this.tbDecay.Size = new System.Drawing.Size(112, 22);
+            this.tbDecay.TabIndex = 15;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 144);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(103, 16);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Decaimento (%)";
+            // 
+            // tbPower
+            // 
+            this.tbPower.Location = new System.Drawing.Point(130, 113);
+            this.tbPower.Name = "tbPower";
+            this.tbPower.Size = new System.Drawing.Size(112, 22);
+            this.tbPower.TabIndex = 13;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 116);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(110, 16);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Potência Máxima";
             // 
             // tbGain
             // 
@@ -185,8 +219,11 @@
             // 
             // gbxControl
             // 
+            this.gbxControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbxControl.Controls.Add(this.cbControlTypes);
-            this.gbxControl.Location = new System.Drawing.Point(12, 364);
+            this.gbxControl.Location = new System.Drawing.Point(169, 390);
             this.gbxControl.Name = "gbxControl";
             this.gbxControl.Size = new System.Drawing.Size(200, 78);
             this.gbxControl.TabIndex = 8;
@@ -195,55 +232,16 @@
             // 
             // gbxSample
             // 
+            this.gbxSample.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbxSample.Controls.Add(this.tbSampleTime);
-            this.gbxSample.Location = new System.Drawing.Point(12, 448);
+            this.gbxSample.Location = new System.Drawing.Point(169, 474);
             this.gbxSample.Name = "gbxSample";
             this.gbxSample.Size = new System.Drawing.Size(200, 68);
             this.gbxSample.TabIndex = 9;
             this.gbxSample.TabStop = false;
             this.gbxSample.Text = "Período da Amostragem";
-            // 
-            // gbxSimTime
-            // 
-            this.gbxSimTime.Controls.Add(this.tbSimTime);
-            this.gbxSimTime.Location = new System.Drawing.Point(12, 522);
-            this.gbxSimTime.Name = "gbxSimTime";
-            this.gbxSimTime.Size = new System.Drawing.Size(200, 68);
-            this.gbxSimTime.TabIndex = 10;
-            this.gbxSimTime.TabStop = false;
-            this.gbxSimTime.Text = "Número de Amostras";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 116);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 16);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Potência Máxima";
-            // 
-            // tbPower
-            // 
-            this.tbPower.Location = new System.Drawing.Point(130, 113);
-            this.tbPower.Name = "tbPower";
-            this.tbPower.Size = new System.Drawing.Size(112, 22);
-            this.tbPower.TabIndex = 13;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 144);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(103, 16);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Decaimento (%)";
-            // 
-            // tbDecay
-            // 
-            this.tbDecay.Location = new System.Drawing.Point(130, 141);
-            this.tbDecay.Name = "tbDecay";
-            this.tbDecay.Size = new System.Drawing.Size(112, 22);
-            this.tbDecay.TabIndex = 15;
             // 
             // tbSampleTime
             // 
@@ -251,6 +249,19 @@
             this.tbSampleTime.Name = "tbSampleTime";
             this.tbSampleTime.Size = new System.Drawing.Size(188, 22);
             this.tbSampleTime.TabIndex = 11;
+            // 
+            // gbxSimTime
+            // 
+            this.gbxSimTime.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbxSimTime.Controls.Add(this.tbSimTime);
+            this.gbxSimTime.Location = new System.Drawing.Point(169, 548);
+            this.gbxSimTime.Name = "gbxSimTime";
+            this.gbxSimTime.Size = new System.Drawing.Size(200, 68);
+            this.gbxSimTime.TabIndex = 10;
+            this.gbxSimTime.TabStop = false;
+            this.gbxSimTime.Text = "Número de Amostras";
             // 
             // tbSimTime
             // 
@@ -261,8 +272,7 @@
             // 
             // SimulationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(800, 628);
             this.Controls.Add(this.gbxSimTime);
             this.Controls.Add(this.gbxSample);
@@ -270,7 +280,9 @@
             this.Controls.Add(this.gbxVariables);
             this.Controls.Add(this.chSim);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "SimulationForm";
             this.Text = "Form5";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.whenClosed);

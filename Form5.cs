@@ -29,11 +29,6 @@ namespace WindowsFormsApp2
             initializeChart();
         }
 
-        private void changeControlType(object sender, EventArgs e)
-        {
-
-        }
-
         private void simulate(object sender, EventArgs e)
         {
             if (btSim.Text == "Simular")
@@ -112,8 +107,6 @@ namespace WindowsFormsApp2
                 ProportionalController controller = new ProportionalController(currentSimulation.gain);
                 error = currentSimulation.targetValue - currentSimulation.currentValue;
                 output = controller.Compute(error) - (currentSimulation.decay * currentSimulation.currentValue);
-                if (output > currentSimulation.power)
-                    output = currentSimulation.power;
             }
 
             if (currentSimulation.controlType == "Integrativo")
@@ -121,8 +114,6 @@ namespace WindowsFormsApp2
                 IntegrativeController controller = new IntegrativeController(currentSimulation.gain);
                 error = currentSimulation.targetValue - currentSimulation.currentValue;
                 output = controller.Compute(error, sampleCount * currentSimulation.sampleTime) - (currentSimulation.decay * currentSimulation.currentValue);
-                if (output > currentSimulation.power)
-                    output = currentSimulation.power;
             }
 
             if (currentSimulation.controlType == "Derivativo")
@@ -130,12 +121,13 @@ namespace WindowsFormsApp2
                 DerivativeController controller = new DerivativeController(currentSimulation.gain);
                 error = currentSimulation.targetValue - currentSimulation.currentValue;
                 output = controller.Compute(error, sampleCount * currentSimulation.sampleTime) - (currentSimulation.decay * currentSimulation.currentValue);
-                if (output > currentSimulation.power)
-                    output = currentSimulation.power;
             }
+            currentSimulation.currentPower = output;
+            if (output > currentSimulation.maxPower)
+                output = currentSimulation.maxPower;
 
             currentSimulation.currentValue += output * currentSimulation.sampleTime / 1000;
-            currentSimulation.power = output;
+            
             currentSimulation.currentError = error;
 
             updateChart();
@@ -146,7 +138,7 @@ namespace WindowsFormsApp2
             sampleCount++;
             try
             {
-                chSim.Invoke(new Action(() => chSim.Series["Potência"].Points.AddXY(sampleCount * currentSimulation.sampleTime, currentSimulation.power)));
+                chSim.Invoke(new Action(() => chSim.Series["Potência"].Points.AddXY(sampleCount * currentSimulation.sampleTime, currentSimulation.currentPower)));
                 chSim.Invoke(new Action(() => chSim.Series["Erro"].Points.AddXY(sampleCount * currentSimulation.sampleTime, currentSimulation.currentError)));
                 chSim.Invoke(new Action(() => chSim.Series["Medida Atual"].Points.AddXY(sampleCount * currentSimulation.sampleTime, currentSimulation.currentValue)));
             }

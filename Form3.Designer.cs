@@ -125,6 +125,8 @@
             this.Controls.Add(this.btSelectSkeleton);
             this.Controls.Add(this.tbSkeleton);
             this.Controls.Add(this.lbSkeleton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "ConfigurationForm";
             this.Text = "Configurações";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.whenClosed);
