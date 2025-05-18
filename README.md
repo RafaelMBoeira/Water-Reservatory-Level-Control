@@ -21,3 +21,4 @@
 
 ## New Features
   * Code "skeletons" for multi-porpose use;
+  * Simulation with different types of control;
