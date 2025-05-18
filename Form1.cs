@@ -260,7 +260,7 @@ namespace WindowsFormsApp2
         }
         private void startMonitoring(object sender, EventArgs e)
         {
-            MonitoringForm frmMonitor = new MonitoringForm(this, csvPath);
+            MonitoringForm frmMonitor = new MonitoringForm(this, csvPath, spNivel.PortName, spNivel.BaudRate);
             frmMonitor.StartPosition = FormStartPosition.CenterParent;
             frmMonitor.Show();
         }

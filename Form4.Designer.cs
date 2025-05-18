@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.navbar = new System.Windows.Forms.MenuStrip();
             this.btRun = new System.Windows.Forms.ToolStripMenuItem();
             this.btExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,13 +41,10 @@
             this.spMonitor = new System.IO.Ports.SerialPort(this.components);
             this.gbxSample = new System.Windows.Forms.GroupBox();
             this.tbSample = new System.Windows.Forms.TextBox();
-            this.gpxBaudRate = new System.Windows.Forms.GroupBox();
-            this.tbBaudRate = new System.Windows.Forms.TextBox();
             this.navbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chMonitor)).BeginInit();
             this.gbxPanel.SuspendLayout();
             this.gbxSample.SuspendLayout();
-            this.gpxBaudRate.SuspendLayout();
             this.SuspendLayout();
             // 
             // navbar
@@ -58,7 +55,7 @@
             this.btExit});
             this.navbar.Location = new System.Drawing.Point(0, 0);
             this.navbar.Name = "navbar";
-            this.navbar.Size = new System.Drawing.Size(1214, 28);
+            this.navbar.Size = new System.Drawing.Size(1041, 28);
             this.navbar.TabIndex = 0;
             this.navbar.Text = "menuStrip1";
             // 
@@ -78,16 +75,16 @@
             // 
             // chMonitor
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chMonitor.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chMonitor.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.chMonitor.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chMonitor.Legends.Add(legend4);
             this.chMonitor.Location = new System.Drawing.Point(12, 49);
             this.chMonitor.Name = "chMonitor";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chMonitor.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chMonitor.Series.Add(series4);
             this.chMonitor.Size = new System.Drawing.Size(776, 357);
             this.chMonitor.TabIndex = 1;
             this.chMonitor.Text = "chart1";
@@ -97,15 +94,15 @@
             this.chbVariables.FormattingEnabled = true;
             this.chbVariables.Location = new System.Drawing.Point(6, 30);
             this.chbVariables.Name = "chbVariables";
-            this.chbVariables.Size = new System.Drawing.Size(205, 310);
+            this.chbVariables.Size = new System.Drawing.Size(205, 242);
             this.chbVariables.TabIndex = 2;
             // 
             // gbxPanel
             // 
             this.gbxPanel.Controls.Add(this.chbVariables);
-            this.gbxPanel.Location = new System.Drawing.Point(983, 49);
+            this.gbxPanel.Location = new System.Drawing.Point(811, 115);
             this.gbxPanel.Name = "gbxPanel";
-            this.gbxPanel.Size = new System.Drawing.Size(217, 357);
+            this.gbxPanel.Size = new System.Drawing.Size(217, 291);
             this.gbxPanel.TabIndex = 3;
             this.gbxPanel.TabStop = false;
             this.gbxPanel.Text = "Selecione Variáveis";
@@ -119,7 +116,7 @@
             this.gbxSample.Controls.Add(this.tbSample);
             this.gbxSample.Location = new System.Drawing.Point(811, 49);
             this.gbxSample.Name = "gbxSample";
-            this.gbxSample.Size = new System.Drawing.Size(166, 60);
+            this.gbxSample.Size = new System.Drawing.Size(217, 60);
             this.gbxSample.TabIndex = 4;
             this.gbxSample.TabStop = false;
             this.gbxSample.Text = "Tempo de Amostragem";
@@ -128,32 +125,14 @@
             // 
             this.tbSample.Location = new System.Drawing.Point(6, 30);
             this.tbSample.Name = "tbSample";
-            this.tbSample.Size = new System.Drawing.Size(154, 22);
+            this.tbSample.Size = new System.Drawing.Size(205, 22);
             this.tbSample.TabIndex = 0;
-            // 
-            // gpxBaudRate
-            // 
-            this.gpxBaudRate.Controls.Add(this.tbBaudRate);
-            this.gpxBaudRate.Location = new System.Drawing.Point(811, 115);
-            this.gpxBaudRate.Name = "gpxBaudRate";
-            this.gpxBaudRate.Size = new System.Drawing.Size(166, 60);
-            this.gpxBaudRate.TabIndex = 5;
-            this.gpxBaudRate.TabStop = false;
-            this.gpxBaudRate.Text = "BaudRate";
-            // 
-            // tbBaudRate
-            // 
-            this.tbBaudRate.Location = new System.Drawing.Point(6, 30);
-            this.tbBaudRate.Name = "tbBaudRate";
-            this.tbBaudRate.Size = new System.Drawing.Size(154, 22);
-            this.tbBaudRate.TabIndex = 0;
             // 
             // MonitoringForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1214, 418);
-            this.Controls.Add(this.gpxBaudRate);
+            this.ClientSize = new System.Drawing.Size(1041, 418);
             this.Controls.Add(this.gbxSample);
             this.Controls.Add(this.gbxPanel);
             this.Controls.Add(this.chMonitor);
@@ -170,8 +149,6 @@
             this.gbxPanel.ResumeLayout(false);
             this.gbxSample.ResumeLayout(false);
             this.gbxSample.PerformLayout();
-            this.gpxBaudRate.ResumeLayout(false);
-            this.gpxBaudRate.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,7 +165,5 @@
         private System.IO.Ports.SerialPort spMonitor;
         private System.Windows.Forms.GroupBox gbxSample;
         private System.Windows.Forms.TextBox tbSample;
-        private System.Windows.Forms.GroupBox gpxBaudRate;
-        private System.Windows.Forms.TextBox tbBaudRate;
     }
 }

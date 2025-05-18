@@ -15,12 +15,13 @@ namespace WindowsFormsApp2
     public partial class MonitoringForm : Form
     {
         private LevelControlForm frmMain;
+        private Monitoring monitor;
         private ConcurrentQueue<string> receivedDataQueue = new ConcurrentQueue<string>();
         private bool running = false;
         private string inputData;
         private string csvPath;
         private int sampleCount = 0;
-        public MonitoringForm(LevelControlForm frmMain, string csvPath)
+        public MonitoringForm(LevelControlForm frmMain, string csvPath, string portName, int baudRate)
         {
             InitializeComponent();
 
@@ -30,7 +31,8 @@ namespace WindowsFormsApp2
 
             this.csvPath = csvPath;
 
-            spMonitor.PortName = this.frmMain.spNivel.PortName;
+            spMonitor.PortName = portName;
+            spMonitor.BaudRate = baudRate;
         }
 
         private void run(object sender, EventArgs e)
@@ -39,7 +41,6 @@ namespace WindowsFormsApp2
             {
                 try
                 {
-                    spMonitor.BaudRate = Convert.ToInt32(tbBaudRate.Text);
                     if (spMonitor.IsOpen == false)
                         spMonitor.Open();
                     spMonitor.Write("I");
@@ -49,6 +50,12 @@ namespace WindowsFormsApp2
                     MessageBox.Show("Porta não encontrada ou não está disponível.");
                     return;
                 }
+
+                monitor = new Monitoring(
+                    spMonitor.BaudRate,
+                    spMonitor.PortName,
+                    Convert.ToInt16(tbSample.Text)
+                );
                 running = true;
 
                 chMonitor.Series.Clear();
@@ -57,7 +64,6 @@ namespace WindowsFormsApp2
 
                 chbVariables.Enabled = false;
                 tbSample.Enabled = false;
-                tbBaudRate.Enabled = false;
                 btRun.Text = "Parar";
                 startThreatingDataReceived();
                 return;
@@ -89,12 +95,13 @@ namespace WindowsFormsApp2
 
                         int i = 0;
                         foreach (string value in varValues)
-                            chMonitor.Series[i].Points.AddXY(Convert.ToInt64(tbSample.Text) * sampleCount, Convert.ToDouble(value));
+                            chMonitor.Invoke(new Action(() => 
+                                chMonitor.Series[i].Points.AddXY(
+                                    monitor.sampleTime * sampleCount, 
+                                    Convert.ToDouble(value))
+                           ));
 
-                        if (chMonitor.Series.Count > 100)
-                            chMonitor.Series.RemoveAt(0);
-
-                        writer.Write(Convert.ToString(Convert.ToInt32(tbSample.Text) * sampleCount) + ";" + inputData + "\r\n");
+                        writer.Write(Convert.ToString(monitor.sampleTime * sampleCount) + ";" + inputData + "\r\n");
 
                         sampleCount++;
                     }
