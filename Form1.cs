@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace WindowsFormsApp2
 {
@@ -197,12 +198,47 @@ namespace WindowsFormsApp2
             if (!string.IsNullOrEmpty(inoFilePath))
                 csvPath = saveChartFile();
 
-            if (!string.IsNullOrEmpty(csvPath))
-                compilerPath = saveCommandFile();
-
-            if (!string.IsNullOrEmpty(compilerPath))
-                System.Diagnostics.Process.Start(compilerPath);
+            executeCompilation();
         }
+
+        private void executeCompilation()
+        {
+            var outputBuilder = new StringBuilder();
+            var errorBuilder = new StringBuilder();
+
+            string command = "arduino-cli compile --fqbn arduino:avr:uno \"" + inoFilePath + "\"";
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                Arguments = "/c \"" + command + "\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
+
+            using (var process = new Process { StartInfo = psi })
+            {
+                process.OutputDataReceived += (sender, e) => { if (e.Data != null) outputBuilder.AppendLine(e.Data); };
+                process.ErrorDataReceived += (sender, e) => { if (e.Data != null) errorBuilder.AppendLine(e.Data); };
+
+                process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+                process.WaitForExit();
+            }
+
+            string message = "Saída:\n\n" + outputBuilder.ToString();
+
+            if (errorBuilder.Length > 0)
+            {
+                message += "\n\nErros:\n\n" + errorBuilder.ToString();
+            }
+
+            MessageBox.Show(message, "Resultado da Compilação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        
         private string createCode(string skeletonPath)
         {
             string fullCode = "";
@@ -333,7 +369,7 @@ namespace WindowsFormsApp2
                 "Compilar",
                 ".BAT",
                 currentProjectPath,
-                "\"C:\\Program Files (x86)\\Arduino\\arduino_debug.exe\"" + " --pref " + "\"build.path=C:\\Users\\Public\\Documents\\Arduino\\plantadenivel\\builder\"" + " --verify " + "\"" + inoFilePath + "\"" + "\r\n" + " pause"
+                "arduino-cli compile --fqbn arduino:avr:uno \"" + inoFilePath + "\""
             );
         }
         private void openConfigurations(object sender, EventArgs e)

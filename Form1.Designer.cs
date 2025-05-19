@@ -101,7 +101,7 @@
             this.btConfigurations});
             this.navbar.Location = new System.Drawing.Point(0, 0);
             this.navbar.Name = "navbar";
-            this.navbar.Size = new System.Drawing.Size(746, 28);
+            this.navbar.Size = new System.Drawing.Size(782, 28);
             this.navbar.TabIndex = 15;
             this.navbar.Text = "menu";
             // 
@@ -225,7 +225,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.chbVariables);
-            this.groupBox1.Location = new System.Drawing.Point(473, 384);
+            this.groupBox1.Location = new System.Drawing.Point(503, 384);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(257, 448);
             this.groupBox1.TabIndex = 41;
@@ -256,7 +256,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 844);
+            this.ClientSize = new System.Drawing.Size(782, 844);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

@@ -116,7 +116,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "PortSelectionForm";
-            this.Text = "Porta de Comunicação";
+            this.Text = "Conexão";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.whenClosed);
             this.ResumeLayout(false);
 
