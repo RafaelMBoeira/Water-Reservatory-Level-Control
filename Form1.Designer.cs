@@ -185,7 +185,6 @@
             this.tbVar.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbVar.Size = new System.Drawing.Size(437, 292);
             this.tbVar.TabIndex = 17;
-            this.tbVar.Text = "//Declare aqui novas variáveis";
             this.tbVar.TextChanged += new System.EventHandler(this.newVariableAdded);
             // 
             // tbCalculations
@@ -199,7 +198,6 @@
             this.tbCalculations.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbCalculations.Size = new System.Drawing.Size(437, 411);
             this.tbCalculations.TabIndex = 18;
-            this.tbCalculations.Text = "//Digite aqui sua lei de controle";
             // 
             // tmSample
             // 

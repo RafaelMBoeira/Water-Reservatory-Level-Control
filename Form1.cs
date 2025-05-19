@@ -130,19 +130,9 @@ namespace WindowsFormsApp2
                 MessageBox.Show("Informe algo na caixa de texto das Variáveis");
                 return;
             }
-            if (variables == "//Declare aqui novas variáveis")
-            {
-                MessageBox.Show("Informe novas variáveis");
-                return;
-            }
             if (string.IsNullOrEmpty(controlLaw))
             {
                 MessageBox.Show("Informe algo na caixa de texto da lei de controle");
-                return;
-            }
-            if (controlLaw == "//Digite aqui sua lei de controle")
-            {
-                MessageBox.Show("Informe sua lei de controle");
                 return;
             }
 
@@ -164,19 +154,10 @@ namespace WindowsFormsApp2
                 MessageBox.Show("Informe algo na caixa de texto das Variáveis");
                 return;
             }
-            if (tbVar.Text == "//Declare aqui novas variáveis")
-            {
-                MessageBox.Show("Informe novas variáveis");
-                return;
-            }
+
             if (string.IsNullOrEmpty(tbCalculations.Text))
             {
                 MessageBox.Show("Informe algo na caixa de texto da lei de controle");
-                return;
-            }
-            if (tbCalculations.Text == "//Digite aqui sua lei de controle")
-            {
-                MessageBox.Show("Informe sua lei de controle");
                 return;
             }
 
@@ -359,17 +340,6 @@ namespace WindowsFormsApp2
                 ".csv",
                 csvPath,
                 header+"\r\n"
-            );
-        }
-        private string saveCommandFile()
-        {
-            return save(
-                "Salvar Comando de Compilação",
-                "Prompt|.BAT",
-                "Compilar",
-                ".BAT",
-                currentProjectPath,
-                "arduino-cli compile --fqbn arduino:avr:uno \"" + inoFilePath + "\""
             );
         }
         private void openConfigurations(object sender, EventArgs e)

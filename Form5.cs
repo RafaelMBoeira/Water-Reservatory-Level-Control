@@ -28,7 +28,6 @@ namespace WindowsFormsApp2
 
             initializeChart();
         }
-
         private void simulate(object sender, EventArgs e)
         {
             if (btSim.Text == "Simular")
@@ -71,13 +70,9 @@ namespace WindowsFormsApp2
                 gbxSample.Enabled = true;
                 gbxSimTime.Enabled = true;
             }
-
-            
         }
-
         private void simulationTask()
         {
-
             Task.Run(() =>
             {
                 for (int i = 0; running && i < currentSimulation.sampleCount; i++)
@@ -85,7 +80,6 @@ namespace WindowsFormsApp2
             });
             
         }
-
         private void initializeChart()
         {
             chSim.Series.Clear();
@@ -132,7 +126,6 @@ namespace WindowsFormsApp2
 
             updateChart();
         }
-
         private void updateChart()
         {
             sampleCount++;
@@ -147,12 +140,10 @@ namespace WindowsFormsApp2
                 return;
             }
         }
-
         private void exit(object sender, EventArgs e)
         {
             Close();
         }
-
         private void whenClosed(object sender, FormClosingEventArgs e)
         {
             running = false;
