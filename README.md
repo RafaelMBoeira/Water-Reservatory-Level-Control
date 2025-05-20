@@ -14,7 +14,7 @@
 
 ## Original Features
   * Create, edit, save and load programs;
-  * Compile and load to board .ino files (executing .bat via C#);
+  * ~~Compile and load to board .ino files (executing .bat via C#)~~;
   * Serial communication;
   * Select and Display data from Arduino in a Chart;
   * Save collected data to a .csv file. 
@@ -22,3 +22,4 @@
 ## New Features
   * Code "skeletons" for multi-porpose use;
   * Simulation with different types of control;
+  * Compile and load to board using Arduino CLI;
