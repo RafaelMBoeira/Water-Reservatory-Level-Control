@@ -33,15 +33,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.navbar = new System.Windows.Forms.MenuStrip();
-            this.btNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.btOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.btSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.btCompile = new System.Windows.Forms.ToolStripMenuItem();
-            this.btLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.btRun = new System.Windows.Forms.ToolStripMenuItem();
             this.btSimulation = new System.Windows.Forms.ToolStripMenuItem();
             this.btMonitor = new System.Windows.Forms.ToolStripMenuItem();
-            this.btSkeletonPicker = new System.Windows.Forms.ToolStripMenuItem();
             this.btConfigurations = new System.Windows.Forms.ToolStripMenuItem();
             this.tbVar = new System.Windows.Forms.TextBox();
             this.tbCalculations = new System.Windows.Forms.TextBox();
@@ -54,6 +48,14 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btLoad = new System.Windows.Forms.ToolStripMenuItem();
+            this.btCompile = new System.Windows.Forms.ToolStripMenuItem();
+            this.carregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btSkeletonPicker = new System.Windows.Forms.ToolStripMenuItem();
+            this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.btOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.btSave = new System.Windows.Forms.ToolStripMenuItem();
             this.navbar.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -91,54 +93,15 @@
             // 
             this.navbar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.navbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btNew,
-            this.btOpen,
-            this.btSave,
-            this.btCompile,
+            this.arquivoToolStripMenuItem,
             this.btLoad,
             this.btRun,
-            this.btSkeletonPicker,
             this.btConfigurations});
             this.navbar.Location = new System.Drawing.Point(0, 0);
             this.navbar.Name = "navbar";
-            this.navbar.Size = new System.Drawing.Size(782, 28);
+            this.navbar.Size = new System.Drawing.Size(775, 28);
             this.navbar.TabIndex = 15;
             this.navbar.Text = "menu";
-            // 
-            // btNew
-            // 
-            this.btNew.Name = "btNew";
-            this.btNew.Size = new System.Drawing.Size(59, 24);
-            this.btNew.Text = "Novo";
-            this.btNew.Click += new System.EventHandler(this.newFile);
-            // 
-            // btOpen
-            // 
-            this.btOpen.Name = "btOpen";
-            this.btOpen.Size = new System.Drawing.Size(65, 24);
-            this.btOpen.Text = "Abrir...";
-            this.btOpen.Click += new System.EventHandler(this.openFile);
-            // 
-            // btSave
-            // 
-            this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(63, 24);
-            this.btSave.Text = "Salvar";
-            this.btSave.Click += new System.EventHandler(this.saveFile);
-            // 
-            // btCompile
-            // 
-            this.btCompile.Name = "btCompile";
-            this.btCompile.Size = new System.Drawing.Size(84, 24);
-            this.btCompile.Text = "Compilar";
-            this.btCompile.Click += new System.EventHandler(this.compile);
-            // 
-            // btLoad
-            // 
-            this.btLoad.Name = "btLoad";
-            this.btLoad.Size = new System.Drawing.Size(80, 24);
-            this.btLoad.Text = "Carregar";
-            this.btLoad.Click += new System.EventHandler(this.loadProgram);
             // 
             // btRun
             // 
@@ -152,22 +115,16 @@
             // btSimulation
             // 
             this.btSimulation.Name = "btSimulation";
-            this.btSimulation.Size = new System.Drawing.Size(196, 26);
+            this.btSimulation.Size = new System.Drawing.Size(224, 26);
             this.btSimulation.Text = "Simulação";
             this.btSimulation.Click += new System.EventHandler(this.startSimulation);
             // 
             // btMonitor
             // 
             this.btMonitor.Name = "btMonitor";
-            this.btMonitor.Size = new System.Drawing.Size(196, 26);
+            this.btMonitor.Size = new System.Drawing.Size(224, 26);
             this.btMonitor.Text = "Monitoramento";
             this.btMonitor.Click += new System.EventHandler(this.startMonitoring);
-            // 
-            // btSkeletonPicker
-            // 
-            this.btSkeletonPicker.Name = "btSkeletonPicker";
-            this.btSkeletonPicker.Size = new System.Drawing.Size(161, 24);
-            this.btSkeletonPicker.Text = "Selecionar Esqueleto";
             // 
             // btConfigurations
             // 
@@ -250,11 +207,72 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Lei de Controle";
             // 
+            // btLoad
+            // 
+            this.btLoad.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btCompile,
+            this.carregarToolStripMenuItem,
+            this.btSkeletonPicker});
+            this.btLoad.Name = "btLoad";
+            this.btLoad.Size = new System.Drawing.Size(71, 24);
+            this.btLoad.Text = "Projeto";
+            // 
+            // btCompile
+            // 
+            this.btCompile.Name = "btCompile";
+            this.btCompile.Size = new System.Drawing.Size(230, 26);
+            this.btCompile.Text = "Compilar";
+            this.btCompile.Click += new System.EventHandler(this.compile);
+            // 
+            // carregarToolStripMenuItem
+            // 
+            this.carregarToolStripMenuItem.Name = "carregarToolStripMenuItem";
+            this.carregarToolStripMenuItem.Size = new System.Drawing.Size(230, 26);
+            this.carregarToolStripMenuItem.Text = "Carregar";
+            this.carregarToolStripMenuItem.Click += new System.EventHandler(this.loadProgram);
+            // 
+            // btSkeletonPicker
+            // 
+            this.btSkeletonPicker.Name = "btSkeletonPicker";
+            this.btSkeletonPicker.Size = new System.Drawing.Size(230, 26);
+            this.btSkeletonPicker.Text = "Selecionar Esqueleto";
+            // 
+            // arquivoToolStripMenuItem
+            // 
+            this.arquivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btNew,
+            this.btOpen,
+            this.btSave});
+            this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
+            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.arquivoToolStripMenuItem.Text = "Arquivo";
+            // 
+            // btNew
+            // 
+            this.btNew.Name = "btNew";
+            this.btNew.Size = new System.Drawing.Size(224, 26);
+            this.btNew.Text = "Novo";
+            this.btNew.Click += new System.EventHandler(this.newFile);
+            // 
+            // btOpen
+            // 
+            this.btOpen.Name = "btOpen";
+            this.btOpen.Size = new System.Drawing.Size(224, 26);
+            this.btOpen.Text = "Abrir";
+            this.btOpen.Click += new System.EventHandler(this.openFile);
+            // 
+            // btSave
+            // 
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(224, 26);
+            this.btSave.Text = "Salvar";
+            this.btSave.Click += new System.EventHandler(this.saveFile);
+            // 
             // LevelControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 844);
+            this.ClientSize = new System.Drawing.Size(775, 844);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -285,11 +303,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.MenuStrip navbar;
-        private System.Windows.Forms.ToolStripMenuItem btNew;
-        private System.Windows.Forms.ToolStripMenuItem btOpen;
-        private System.Windows.Forms.ToolStripMenuItem btSave;
-        private System.Windows.Forms.ToolStripMenuItem btCompile;
-        private System.Windows.Forms.ToolStripMenuItem btLoad;
         private System.Windows.Forms.TextBox tbVar;
         private System.Windows.Forms.TextBox tbCalculations;
         private System.Windows.Forms.SaveFileDialog sfdSave;
@@ -298,7 +311,6 @@
         private System.Windows.Forms.ToolStripMenuItem btRun;
         public System.IO.Ports.SerialPort spNivel;
         private System.Windows.Forms.Timer tmVariaveis;
-        private System.Windows.Forms.ToolStripMenuItem btSkeletonPicker;
         private System.Windows.Forms.ToolStripMenuItem btConfigurations;
         private System.Windows.Forms.ToolStripMenuItem btSimulation;
         private System.Windows.Forms.ToolStripMenuItem btMonitor;
@@ -306,6 +318,14 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ToolStripMenuItem arquivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btNew;
+        private System.Windows.Forms.ToolStripMenuItem btOpen;
+        private System.Windows.Forms.ToolStripMenuItem btSave;
+        private System.Windows.Forms.ToolStripMenuItem btLoad;
+        private System.Windows.Forms.ToolStripMenuItem btCompile;
+        private System.Windows.Forms.ToolStripMenuItem carregarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btSkeletonPicker;
     }
 }
 

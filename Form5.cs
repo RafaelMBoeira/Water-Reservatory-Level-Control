@@ -50,6 +50,7 @@ namespace WindowsFormsApp2
                     MessageBox.Show("Todas as entradas devem ser numéricas.");
                     return;
                 }
+
                 chSim.Series.Clear();
                 sampleCount = 0;
                 initializeChart();
